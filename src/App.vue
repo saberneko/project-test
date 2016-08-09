@@ -20,16 +20,24 @@
       <a href="https://github.com/vuejs/vuex/" target="_blank">vuex</a> for state management.
     </p>
   </div>
+  <div id="example-1">
+    Hello {{name}}!
+  </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import Vue from 'vue'
 
-export default {
-  components: {
-    Hello_uu: Hello
-  }
+var exampleData = {
+  name: 'Vue.js'
 }
+
+var exampleVM = new Vue({
+  el: 'example-1',
+  data: exampleData
+})
+
+export default exampleVM
 </script>
 
 <style>
