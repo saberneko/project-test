@@ -29,6 +29,9 @@ router.map({
 	},
 	'main': {
 		component: require('./view/main')
+	},
+	'submain': {
+		component: require('./view/submain')
 	}
 })
 
@@ -37,4 +40,4 @@ router.beforeEach(function () {
 	window.scrollTo(0, 0)
 })
 
-router.start(App, '#app-test')
+router.start(App, '#app')

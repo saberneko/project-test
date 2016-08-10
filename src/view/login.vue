@@ -7,6 +7,8 @@
 			{{item.name}}
 		</li>
 	</ul>
+	<p>当前路径:{{$route.name}}</p>
+	<p>当前路由参数：{{$route.params | json}}</p>
 	<form class="mui-input-group">
 		<ul class="mui-table-view mui-table-view-chevron">
 			<li class="mui-input-row">
