@@ -15,14 +15,24 @@ let router = new Router({
 let emptyBase = Vue.extend({
 	name: 'Base',
 	template:
-		'<div class="current-area">' +
+		'<div class="current-area">Home Page' +
 			'<router-view></router-view>' + // <- 嵌套的外链
 		'</div>'
 })
 
+let Bar = Vue.extend({
+	name: 'Bar',
+	template: '<p>This is from bar</p>'
+})
+
 router.map({
 	'/': {
-		component: emptyBase
+		component: emptyBase,
+		subRoutes: {
+			'/bar': {
+				component: Bar
+			}
+		}
 	},
 	'login': {
 		component: require('./view/login')
@@ -30,8 +40,9 @@ router.map({
 	'main': {
 		component: require('./view/main')
 	},
-	'submain': {
-		component: require('./view/submain')
+	'user/:userId': {
+		name: 'user',
+		component: require('./view/user')
 	}
 })
 

@@ -7,8 +7,6 @@
 			{{item.name}}
 		</li>
 	</ul>
-	<p>当前路径:{{$route.name}}</p>
-	<p>当前路由参数：{{$route.params | json}}</p>
 	<form class="mui-input-group">
 		<ul class="mui-table-view mui-table-view-chevron">
 			<li class="mui-input-row">
@@ -32,6 +30,9 @@
 	</div>
 	<div class="mui-content-padded">
 		<button v-link="{path:'main'}" id='btnLogin' class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">测试跳转</button>
+	</div>
+	<div class="mui-content-padded">
+		<button v-link="{ name: 'user', params: { userId: 123}}" id='btnLogin' class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">具名路径</button>
 	</div>
 </template>
 
