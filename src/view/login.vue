@@ -53,7 +53,7 @@ export default {
 
 	data () {
 		return {
-			data: 123,
+			// data: 123,
 			users: [
 				{
 					name: 'neko' // 3
