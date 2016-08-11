@@ -43,6 +43,10 @@ router.map({
 	'user/:userId': {
 		name: 'user',
 		component: require('./view/user')
+	},
+	'v-if': {
+		name: 'v-if',
+		component: require('./view/v-if')
 	}
 })
 
