@@ -47,6 +47,9 @@ router.map({
 	'v-if': {
 		name: 'v-if',
 		component: require('./view/v-if')
+	},
+	'event': {
+		component: require('./view/event')
 	}
 })
 
