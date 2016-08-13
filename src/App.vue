@@ -3,7 +3,7 @@
     <img class="logo" src="./assets/logo.png">
     <hello_uu></hello_uu>
     <p>
-      Welcome to your Vue.js app!qqqqq
+      Welcome to your Vue.js app!
     </p>
     <p>
       To get a better understanding of how this boilerplate works, check out
