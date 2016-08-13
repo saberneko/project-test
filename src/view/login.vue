@@ -63,21 +63,21 @@ export default {
 				}
 			]
 		}
-	},
-
-	props: {
-		name: {
-			type: String,
-			required: true,
-			default: 'Mr. Chen'
-		},
-		female: {
-			type: [String],
-			default: 'Miss. Chen',
-			required: false,
-			twoWay: true
-		}
 	}
+
+	// props: {
+	// 	name: {
+	// 		type: String,
+	// 		required: true,
+	// 		default: 'Mr. Chen'
+	// 	},
+	// 	female: {
+	// 		type: [String],
+	// 		default: 'Miss. Chen',
+	// 		required: false,
+	// 		twoWay: true
+	// 	}
+	// }
 }
 </script>
 
