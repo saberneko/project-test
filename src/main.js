@@ -8,29 +8,33 @@ import App from './App'
 
 // routing
 let router = new Router({
-  hashbang: false, // disable hashbang though in hash mode
-  // history: true // enable history mode
+	hashbang: false// disable hashbang though in hash mode
+	// history: true // enable history mode
 })
 
 let emptyBase = Vue.extend({
-  name: 'Base',
-  template:
-    '<div class="current-area">' +
-      '<router-view></router-view>' + // <- 嵌套的外链
-    '</div>'
+	name: 'Base',
+	template:
+		'<div class="current-area">' +
+			'<router-view></router-view>' + // <- 嵌套的外链
+		'</div>'
 })
 
-// import * as Widgets from './views/widgets'
-
 router.map({
-  '/': {
-    component: emptyBase
-  }
+	'/': {
+		component: emptyBase
+	},
+	'login': {
+		component: require('./view/login')
+	},
+	'main': {
+		component: require('./view/main')
+	}
 })
 
 router.beforeEach(function () {
-  // 动态判定 router
-  window.scrollTo(0, 0)
+	// 动态判定 router
+	window.scrollTo(0, 0)
 })
 
-router.start(App, '#app')
+router.start(App, '#app-test')
