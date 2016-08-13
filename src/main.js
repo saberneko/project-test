@@ -27,12 +27,7 @@ let Bar = Vue.extend({
 
 router.map({
 	'/': {
-		component: emptyBase,
-		subRoutes: {
-			'/bar': {
-				component: Bar
-			}
-		}
+		component: emptyBase
 	},
 	'login': {
 		component: require('./view/login')
@@ -47,6 +42,9 @@ router.map({
 	'v-if': {
 		name: 'v-if',
 		component: require('./view/v-if')
+	},
+	'event': {
+		component: require('./view/event')
 	}
 })
 
