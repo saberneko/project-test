@@ -15,20 +15,38 @@ let router = new Router({
 let emptyBase = Vue.extend({
 	name: 'Base',
 	template:
-		'<div class="current-area">' +
+		'<div class="current-area">Home Page' +
 			'<router-view></router-view>' + // <- 嵌套的外链
 		'</div>'
 })
 
+let Bar = Vue.extend({
+	name: 'Bar',
+	template: '<p>This is from bar</p>'
+})
+
 router.map({
 	'/': {
-		component: emptyBase
+		component: emptyBase,
+		subRoutes: {
+			'/bar': {
+				component: Bar
+			}
+		}
 	},
 	'login': {
 		component: require('./view/login')
 	},
 	'main': {
 		component: require('./view/main')
+	},
+	'user/:userId': {
+		name: 'user',
+		component: require('./view/user')
+	},
+	'v-if': {
+		name: 'v-if',
+		component: require('./view/v-if')
 	}
 })
 
@@ -37,4 +55,4 @@ router.beforeEach(function () {
 	window.scrollTo(0, 0)
 })
 
-router.start(App, '#app-test')
+router.start(App, '#app')

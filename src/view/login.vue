@@ -31,6 +31,9 @@
 	<div class="mui-content-padded">
 		<button v-link="{path:'main'}" id='btnLogin' class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">测试跳转</button>
 	</div>
+	<div class="mui-content-padded">
+		<button v-link="{ name: 'user', params: { userId: 123}}" id='btnLogin' class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">具名路径</button>
+	</div>
 </template>
 
 <script>
@@ -50,7 +53,7 @@ export default {
 
 	data () {
 		return {
-			data: 123,
+			// data: 123,
 			users: [
 				{
 					name: 'neko' // 3
