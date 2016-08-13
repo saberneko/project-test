@@ -36,9 +36,10 @@ var exampleData = {
 }
 
 var exampleVM = {
-	// el: 'example-1',
 	name: 'App',
-	data: exampleData
+	data () {
+		return exampleData
+	}
 }
 
 export default exampleVM

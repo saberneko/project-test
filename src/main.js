@@ -27,12 +27,7 @@ let Bar = Vue.extend({
 
 router.map({
 	'/': {
-		component: emptyBase,
-		subRoutes: {
-			'/bar': {
-				component: Bar
-			}
-		}
+		component: emptyBase
 	},
 	'login': {
 		component: require('./view/login')

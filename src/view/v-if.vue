@@ -24,8 +24,6 @@
 <script>
 export default {
 
-	el: '#example-1',
-
 	name: 'v-if',
 
 	data () {
