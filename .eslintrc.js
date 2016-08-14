@@ -39,6 +39,8 @@ module.exports = {
         "VariableDeclarator": true,
         "ImportDeclaration": true
       },
-    }]
+    }],
+    "key-spacing": [0],
+    "comma-spacing": [0]
   },
 }

@@ -21,7 +21,14 @@ module.exports = {
     port: 8080,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      "/Service" : {
+        target : "http://121.43.158.213:8003",//localhost:64719
+        toProxy: true,
+        changeOrigin: true,
+        // pathRewrite: {'^/api/' : '/biye-api/'}
+      }
+    },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
     // (https://github.com/webpack/css-loader#sourcemaps)
