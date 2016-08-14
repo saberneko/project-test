@@ -19,13 +19,12 @@
 // 	}
 // }
 export default {
-	name: 'user',
+	name: 'user'
+	// data () {
+	// 	return {
 
-	data () {
-		return {
-
-		}
-	}
+	// 	}
+	// }
 }
 </script>
 
