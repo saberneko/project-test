@@ -1,5 +1,5 @@
 <template>
-	<h1 v-if="ok">Yes</h1>
+	<h1 v-if="parentMessage === 'Parent'">Yes</h1>
 	<h1 v-else>No</h1>
 	<p v-show="ok">Hello!保持在dom中,display:none</p>
 	<div v-if="Math.random() > 0.5">
