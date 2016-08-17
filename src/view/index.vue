@@ -11,79 +11,21 @@
 	</nav>
 	<div id="subdiv_index">
 		<div id="segmentedControl" class="mui-segmented-control" style="top:40px;z-index: 999;">
-			<a class="mui-control-item mui-active" v-on:click="setDisplay">
+			<a class="mui-control-item mui-active" v-on:click="setDisplay('focus')">
 						我要关注
 			</a>
-			<a class="mui-control-item" href="#">
+			<a class="mui-control-item" v-on:click="setDisplay('expert')">
 						谁是大神
 			</a>
-			<a class="mui-control-item" href="#">
+			<a class="mui-control-item" v-on:click="setDisplay('statics')">
 						统计预测
 			</a>
 		</div>
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper" style="background-color: #efeff4;top: 90px;">
 			<div class="mui-scroll">
-				<!--<div style="margin-top: 105px;">-->
-				<div v-if="mode !=== 'focus'" class="mui-control-content mui-active">
-					<div id="slider" class="mui-slider">
-						<div class="mui-slider-group mui-slider-loop">
-							<!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
-							<div class="mui-slider-item mui-slider-item-duplicate">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-							<!-- 第一张 -->
-							<div class="mui-slider-item">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-							<!-- 第二张 -->
-							<div class="mui-slider-item">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-							<!-- 第三张 -->
-							<div class="mui-slider-item">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-							<!-- 第四张 -->
-							<div class="mui-slider-item">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-							<!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
-							<div class="mui-slider-item mui-slider-item-duplicate">
-								<a href="#">
-									<img src="../assets/images/img1.png">
-								</a>
-							</div>
-						</div>
-					</div>
-					<ul class="mui-table-view mui-grid-view mui-grid-9" id="BigMatterList" style="background-color: #FFFFFF;">
-
-					</ul>
-					<ul class="mui-table-view " id="Hot5ProjectList">
-
-					</ul>
-				</div>
-				<div id="item2" class="mui-control-content">
-					<ul class="mui-table-view" id="ManitoList">
-
-					</ul>
-				</div>
-				<div id="item3" class="mui-control-content">
-					<div id="StatisticalList" class="mui-panel-view">
-
-					</div>
-					<!--<ul class="mui-table-view" id="StatisticalList">
-					</ul>-->
-				</div>
+				<focus v-if="mode === 'focus'"></focus>
+				<expert v-if="mode === 'expert'"></expert>
+				<statics v-if="mode === 'statics'"></statics>
 			</div>
 		</div>
 	</div>
@@ -154,6 +96,9 @@
 
 <script>
 import mui from '../lib/mui.min.js'
+import focus from './focus.vue'
+import expert from './expert.vue'
+import statics from './statics.vue'
 
 export default {
 
@@ -168,14 +113,20 @@ export default {
 
 	data () {
 		return {
-			mode: ''
+			mode: 'focus'
 		}
 	},
 
 	methods: {
-		setDisplay: function () {
-			this.$data.mode = 'focus'
+		setDisplay: function (info) {
+			this.mode = info
 		}
+	},
+
+	components: {
+		focus,
+		expert,
+		statics
 	}
 }
 </script>
