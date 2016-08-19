@@ -105,6 +105,10 @@ export default {
 	name: 'index',
 
 	ready () {
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005
+		})
+
 		var slider = mui('#slider')
 		slider.slider({
 			interval: 5000
