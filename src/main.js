@@ -48,6 +48,10 @@ router.map({
 		name: 'smallClasses',
 		component: require('./view/smallclass')
 	},
+	'matterlist/:smallId': {
+		name: 'matterLists',
+		component: require('./view/matterlist')
+	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
 		component: require('./view/v-if_v-for')
