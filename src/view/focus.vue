@@ -67,6 +67,7 @@
 import mui from '../lib/mui.min.js'
 import R from '../common/request'
 import { GP } from '../common/index'
+import { getHot5ProjectList } from 'src/vuex/actions'
 
 function requireAll (r) { r.keys().forEach(r) }
 requireAll(require.context('../assets/images/', true, /\.jpe?g|png|ico$/))
@@ -75,14 +76,18 @@ export default {
 
 	name: 'focus',
 
+	vuex: {
+		actions: {
+			getHot5ProjectList
+		}
+	},
+
 	ready () {
 		R.post('/Service/GetBigMatterList.ashx').then(data => {
 			this.lists = data
 		})
 
-		R.post('/Service/GetHot5ProjectList.ashx',{
-			'_flag': 're'
-		}).then(data => {
+		this.getHot5ProjectList().then(data => {
 			this.hotLists = data
 		})
 	},
