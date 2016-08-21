@@ -42,7 +42,6 @@ export default {
 				_flag: 're'
 
 			}).then(data => {
-				console.log(data)
 				this.lists = data
 			})
 		}
