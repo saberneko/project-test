@@ -41,15 +41,16 @@
 			</div>
 		</div>
 		<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;">
-			<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" v-for="($index,topItem) in lists">
+			<li v-link="{ path: '/smallclass/' + topItem.GP_Matter_bigId }" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" v-for="($index,topItem) in lists">
 				<a>
 					<img class="img-icon" :src="'/static/img/img'+$index+'.ico'">
 					<div class="font-color img-icon-title">{{topItem.GP_name}}</div>
 				</a>
 			</li>
 		</ul>
+		<!-- <pre>{{hotLists | json}}</pre> -->
 		<ul class="mui-table-view">
-			<li class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
+			<li v-link="{ path: '/detail/' + hotItem.GP_ProjectId }"class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
 				<a >
 					<img class="mui-media-object mui-pull-left hot-list-img" src="../assets/images/top.net.ico">
 					<div class="mui-media-body mui-ellipsis hot-list-fontsize" style="font-size:15px">{{hotItem.GP_name}}
@@ -75,16 +76,14 @@ export default {
 	name: 'focus',
 
 	ready () {
-		let self = this
-
-		R.post('/Service/GetBigMatterList.ashx').then(function (data) {
-			self.lists = data
+		R.post('/Service/GetBigMatterList.ashx').then(data => {
+			this.lists = data
 		})
 
 		R.post('/Service/GetHot5ProjectList.ashx',{
 			'_flag': 're'
-		}).then(function (data) {
-			self.hotLists = data
+		}).then(data =>{
+			this.hotLists = data
 		})
 	},
 
