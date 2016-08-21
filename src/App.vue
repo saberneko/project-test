@@ -26,7 +26,11 @@ var exampleVM = {
 export default exampleVM
 </script>
 
-<style>
+<style lang="less">
 @import './assets/css/mui.min.css';
+
+body {
+	font-family: Microsoft YaHei;
+}
 
 </style>
