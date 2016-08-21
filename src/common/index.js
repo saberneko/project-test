@@ -25,5 +25,4 @@ export default {
 	getQueryString,
 	NewOpenWindow
 }
-
 // export const pathToAssets

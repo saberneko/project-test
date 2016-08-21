@@ -39,12 +39,15 @@ router.map({
 		name: 'user',
 		component: require('./view/user')
 	},
-	'v-if': {
-		name: 'v-if',
-		component: require('./view/v-if')
+	'v-if_v-for': {
+		name: 'v-if_v-for',
+		component: require('./view/v-if_v-for')
 	},
 	'event': {
 		component: require('./view/event')
+	},
+	'class-style': {
+		component: require('./view/class-style')
 	}
 })
 

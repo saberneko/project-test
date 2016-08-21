@@ -62,7 +62,11 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
         loader: 'file-loader',
         query: {
+<<<<<<< HEAD
           limit: 1000000,
+=======
+          limit: 10000,
+>>>>>>> 36699425d449d7ef605ff211c6dc666ebfc9601c
           name: utils.assetsPath('img/[name].[ext]')
         }
       },
