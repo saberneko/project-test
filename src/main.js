@@ -39,6 +39,10 @@ router.map({
 		name: 'hotItemDetail',
 		component: require('./view/detail')
 	},
+	'smallclass/:bigId': {
+		name: 'smallClasses',
+		component: require('./view/smallclass')
+	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
 		component: require('./view/v-if_v-for')
