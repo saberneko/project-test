@@ -7,8 +7,8 @@
 		<div class="mui-scroll">
 			<!--数据列表-->
 			<ul id="list" class="mui-table-view">
-				<li v-for="Item in lists" class="mui-table-view-cell">
-					<a class="mui-navigate-right" href="">{{Item.GP_name}}</a>
+				<li v-link="{ path: '/matterlist/' + smallItem.GP_Matter_smallId}" v-for="smallItem in lists" class="mui-table-view-cell">
+					<a class="mui-navigate-right" href="">{{smallItem.GP_name}}</a>
 				</li>
 			</ul>
 		</div>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import mui from '../lib/mui.min.js'
 import R from 'src/common/request'
 
 export default {
@@ -29,6 +30,10 @@ export default {
 	},
 
 	ready () {
+		mui('.mui-scroll-wrapper').scroll({
+			deceleration: 0.0005
+		})
+
 		this.getSmallClass()
 	},
 
