@@ -53,10 +53,11 @@
 			<li v-link="{ path: '/detail/' + hotItem.GP_ProjectId }"class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
 				<a >
 					<img class="mui-media-object mui-pull-left hot-list-img" src="../assets/images/top.net.ico">
-					<div class="mui-media-body mui-ellipsis hot-list-fontsize" style="font-size:15px">{{hotItem.GP_name}}
+					<div class="mui-media-body mui-ellipsis hot-list-fontsize">{{hotItem.GP_name}}
 					<p class="mui-ellipsis hot-list-p" >关注度:{{hotItem.GP_hot}}</p>
 					<p class="mui-ellipsis hot-list-p" >截止时间:{{hotItem.GP_Time}}</p>
 					</div>
+					<button class="mui-btn mui-icon btn-focus" v-bind:class="[hotItem.IsMy ? 'mui-icon-star' : 'mui-icon-star-filled']" @click.prevent="focusProject(hotItem.GP_ProjectId)"></button>
 				</a>
 			</li>
 		</ul>
@@ -79,6 +80,9 @@ export default {
 	vuex: {
 		actions: {
 			getHot5ProjectList
+		},
+		getters: {
+			projectMap: ({projectMap}) => projectMap
 		}
 	},
 
@@ -87,9 +91,7 @@ export default {
 			this.lists = data
 		})
 
-		this.getHot5ProjectList().then(data => {
-			this.hotLists = data
-		})
+		this.queryList()
 	},
 
 	data () {
@@ -97,12 +99,27 @@ export default {
 			lists: null,
 			hotLists: null
 		}
+	},
+
+	methods: {
+		focusProject (pid) {
+			return R.post('/Service/FocusProject.ashx', {
+				Id: pid
+			}).then(() => {
+				this.queryList()
+			})
+		},
+		queryList () {
+			this.getHot5ProjectList().then(data => {
+				this.hotLists = data
+			})
+		}
 	}
 
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="less" scoped>
 .hot-list-img{
 	width:30px;
 	height: 32px;
@@ -115,5 +132,10 @@ export default {
 .hot-list-p{
 	margin-right: 30px;
 	font-size:12px;
+}
+.btn-focus{
+	font-size:20px;
+	color: #0086C8;
+	border: 0px;
 }
 </style>
