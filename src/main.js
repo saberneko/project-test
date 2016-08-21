@@ -6,6 +6,11 @@ Vue.use(Resource)
 
 import App from './App'
 
+// 运行与 App 中
+if (process.RUNTIME_ENV === 'app') {
+
+}
+
 // routing
 let router = new Router({
 	hashbang: false,// disable hashbang though in hash mode

@@ -30,6 +30,12 @@ export default {
 		this.getDetail()
 	},
 
+	vuex: {
+		getters: {
+			projectMap: ({projectMap}) => projectMap
+		}
+	},
+
 	methods: {
 		getDetail () {
 			return R.post('/Service/GetProjectDetail.ashx', {
@@ -42,7 +48,11 @@ export default {
 				this.content = data[0]
 				this.detail_name = data[0].GP_name
 				this.sub_name = data[0].GP_SubName
-				// console.info(this.detail_name, data.GP_name)
+
+				let { projectId } = this.$route.params,
+					project = this.projectMap.get(projectId)
+
+				this.isFocused = project.IsMy === 0
 			})
 		}
 	}
