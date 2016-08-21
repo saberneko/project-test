@@ -2,17 +2,18 @@
 <!-- 	<span>{{$route.params.projectId}}</span> -->
 	<header class="mui-bar mui-bar-nav">
 		<a id="back" backId="main" class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color" onclick="goBack(this)"></a>
-		<h1 id="title" class="mui-title">{{detail_name}}</h1>
+		<h1 id="title" class="mui-title">{{detail_name ? detail_name : ''}}</h1>
 	</header>
 	<div v-if="content" class="mui-content content-text">
 		{{{ content.GP_ContentHTML }}}
 	</div>
-	<button id="adding" type="button" class="mui-btn mui-btn-primary mui-btn-block mui-btn-adding">关注</button>
+	<button id="adding" type="button" class="mui-btn mui-btn-block mui-btn-adding" v-bind:class="[isFocused ? 'mui-btn-danger' : 'mui-btn-primary']" @click="setFocus">{{isFocused ? '取消关注' : '关注'}}</button>
 </template>
 
 <script>
 import R from 'src/common/request'
 import { GP } from '../common/index'
+import { getHot5ProjectList } from 'src/vuex/actions'
 
 export default {
 
@@ -22,7 +23,8 @@ export default {
 		return {
 			content: null,
 			detail_name: null,
-			sub_name: null
+			sub_name: null,
+			isFocused: null
 		}
 	},
 
@@ -31,6 +33,9 @@ export default {
 	},
 
 	vuex: {
+		actions: {
+			getHot5ProjectList
+		},
 		getters: {
 			projectMap: ({projectMap}) => projectMap
 		}
@@ -53,6 +58,23 @@ export default {
 					project = this.projectMap.get(projectId)
 
 				this.isFocused = project.IsMy === 0
+			})
+		},
+		setFocus () {
+			return R.post('/Service/FocusProject.ashx', {
+				Id: this.$route.params.projectId
+			}).then((data) => {
+				if (data === 'addSuccess') {
+					this.isFocused = true
+				} else if (data === 'cancelSuccess') {
+					this.isFocused = false
+				}
+				// this.queryList()
+			})
+		},
+		queryList () {
+			this.getHot5ProjectList().then(data => {
+				this.getDetail()
 			})
 		}
 	}
@@ -111,6 +133,7 @@ export default {
 
 	.content-text {
 		background-color: #FFFFFF;
-		padding: 44px 15px;
+		padding: 0px 15px;
+		margin-top: 55px;
 	}
 </style>
