@@ -31,9 +31,13 @@ router.map({
 	'main': {
 		component: require('./view/main')
 	},
-	'user/:userId': {
+	'user/:userId/:userInfo': {
 		name: 'user',
 		component: require('./view/user')
+	},
+	'detail/:projectId': {
+		name: 'hotItemDetail',
+		component: require('./view/detail')
 	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
