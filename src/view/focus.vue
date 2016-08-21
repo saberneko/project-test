@@ -82,7 +82,7 @@ export default {
 
 		R.post('/Service/GetHot5ProjectList.ashx',{
 			'_flag': 're'
-		}).then(data =>{
+		}).then(data => {
 			this.hotLists = data
 		})
 	},
