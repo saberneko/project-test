@@ -53,7 +53,7 @@
 			<li v-link="{ path: '/detail/' + hotItem.GP_ProjectId }"class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
 				<a >
 					<img class="mui-media-object mui-pull-left hot-list-img" src="../assets/images/top.net.ico">
-					<div class="mui-media-body mui-ellipsis hot-list-fontsize">{{hotItem.GP_name}}
+					<div class="mui-media-body mui-ellipsis">{{hotItem.GP_name}}
 					<p class="mui-ellipsis hot-list-p" >关注度:{{hotItem.GP_hot}}</p>
 					<p class="mui-ellipsis hot-list-p" >截止时间:{{hotItem.GP_Time}}</p>
 					</div>
@@ -126,7 +126,7 @@ export default {
 	margin-top: 10px;
 	margin-right: 15px;
 }
-.hot-list-fontsize{
+.mui-table-view-cell a div{
 	font-size:15px;
 }
 .hot-list-p{

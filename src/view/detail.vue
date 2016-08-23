@@ -63,7 +63,7 @@ export default {
 		setFocus () {
 			return R.post('/Service/FocusProject.ashx', {
 				Id: this.$route.params.projectId
-			}).then((data) => {
+			}).then(data => {
 				if (data === 'addSuccess') {
 					this.isFocused = true
 				} else if (data === 'cancelSuccess') {

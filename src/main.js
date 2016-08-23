@@ -4,6 +4,9 @@ import Resource from 'vue-resource'
 Vue.use(Router)
 Vue.use(Resource)
 
+import VueTouch from 'vue-touch'
+Vue.use(VueTouch)
+
 import App from './App'
 
 // 运行与 App 中

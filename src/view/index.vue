@@ -11,13 +11,13 @@
 	</nav>
 	<div id="subdiv_index">
 		<div id="segmentedControl" class="mui-segmented-control" style="top:40px;z-index: 999;">
-			<a class="mui-control-item mui-active" v-on:click="setDisplay('focus')">
+			<a class="mui-control-item mui-active" v-touch:tap="setDisplay('focus')" @click="setDisplay('focus')">
 						我要关注
 			</a>
-			<a class="mui-control-item" v-on:click="setDisplay('expert')">
+			<a class="mui-control-item" v-touch:tap="setDisplay('expert')" @click="setDisplay('expert')">
 						谁是大神
 			</a>
-			<a class="mui-control-item" v-on:click="setDisplay('statics')">
+			<a class="mui-control-item" v-touch:tap="setDisplay('statics')" @click="setDisplay('statics')">
 						统计预测
 			</a>
 		</div>
@@ -121,16 +121,16 @@ export default {
 		}
 	},
 
-	methods: {
-		setDisplay: function (info) {
-			this.mode = info
-		}
-	},
-
 	components: {
 		focus,
 		expert,
 		statics
+	},
+
+	methods: {
+		setDisplay: function (info) {
+			this.mode = info
+		}
 	}
 }
 </script>
