@@ -16,7 +16,7 @@ module.exports = {
     'arrow-parens': 0,
     // allow async-await
     'generator-star-spacing': 0,
-    'indent': ['error', 'tab', { "VariableDeclarator": { "var": 2, "let": 2, "const": 3 }, "SwitchCase": 1 }],
+    'indent': ['error', 'tab', { "VariableDeclarator": { "var": 1, "let": 1, "const": 3 }, "SwitchCase": 1 }],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     //  allows the opening and closing braces for a block to be on the same line

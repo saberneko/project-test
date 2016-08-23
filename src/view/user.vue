@@ -4,27 +4,21 @@
 	<p>当前路径名：{{$route.name}}</p>
 	<p>当前路由参数: {{$route.params | json}}</p>
 	<p>{{$route.params.userId}}</p>
+	<p>{{$route.params.userInfo}}</p>
 	<a v-link="{ path: 'bar'}">Go to /user/bar</a>
 	<a v-link="{ path: '/bar'}">Go to /bar</a>
 </template>
 
 <script>
-// export default {
-// 	name: 'subman',
-
-// 	data () {
-//     	return {
-
-//     	}
-// 	}
-// }
 export default {
-	name: 'user'
-	// data () {
-	// 	return {
+	name: 'user',
 
-	// 	}
-	// }
+	data () {
+		console.log(this.$route)
+		return {
+
+		}
+	}
 }
 </script>
 

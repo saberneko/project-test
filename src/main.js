@@ -6,28 +6,29 @@ Vue.use(Resource)
 
 import App from './App'
 
+// 运行与 App 中
+if (process.RUNTIME_ENV === 'app') {
+
+}
+
 // routing
 let router = new Router({
-	hashbang: false// disable hashbang though in hash mode
-	// history: true // enable history mode
+	hashbang: false,// disable hashbang though in hash mode
+	history: true, // enable history mode
+	mode: 'html5'
 })
 
-let emptyBase = Vue.extend({
+let emptyRouteNode = Vue.extend({
 	name: 'Base',
 	template:
-		'<div class="current-area">Home Page' +
+		'<div class="current-area">' +
 			'<router-view></router-view>' + // <- 嵌套的外链
 		'</div>'
 })
 
-let Bar = Vue.extend({
-	name: 'Bar',
-	template: '<p>This is from bar</p>'
-})
-
 router.map({
 	'/': {
-		component: emptyBase
+		component: emptyRouteNode
 	},
 	'login': {
 		component: require('./view/login')
@@ -35,16 +36,31 @@ router.map({
 	'main': {
 		component: require('./view/main')
 	},
-	'user/:userId': {
+	'user/:userId/:userInfo': {
 		name: 'user',
 		component: require('./view/user')
 	},
-	'v-if': {
-		name: 'v-if',
-		component: require('./view/v-if')
+	'detail/:projectId': {
+		name: 'hotItemDetail',
+		component: require('./view/detail')
+	},
+	'smallclass/:bigId': {
+		name: 'smallClasses',
+		component: require('./view/smallclass')
+	},
+	'matterlist/:smallId': {
+		name: 'matterLists',
+		component: require('./view/matterlist')
+	},
+	'v-if_v-for': {
+		name: 'v-if_v-for',
+		component: require('./view/v-if_v-for')
 	},
 	'event': {
 		component: require('./view/event')
+	},
+	'class-style': {
+		component: require('./view/class-style')
 	}
 })
 

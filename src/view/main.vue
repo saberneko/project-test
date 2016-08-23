@@ -1,14 +1,14 @@
 <template>
-	<div class="mui-content">
-		<header class="mui-bar mui-bar-nav" style="padding-right: 15px;">
-			<h1 class="mui-title">豆芽儿</h1>
-			<button id='setting' onclick="NewApplication();" class=" mui-pull-right mui-btn-link">创建</button>
-		</header>
-	</div>
+	<header class="mui-bar mui-bar-nav" style="padding-right: 15px;position:fixed">
+		<h1 class="mui-title">豆芽儿</h1>
+		<button id='setting' onclick="NewApplication();" class=" mui-pull-right mui-btn-link">创建</button>
+	</header>
+	<index></index>
 </template>
 
 <script>
 import mui from '../lib/mui.min.js'
+import index from './index.vue'
 
 export default {
 
@@ -18,19 +18,19 @@ export default {
 		mui.init({
 			gestureConfig: {
 				doubletap: true
-			},
-			subpages: [{
-				url: 'lndex.html',
-				id: 'Index',
-				createNew: true,
-				extras: {
-					contentData: '1'
-				},
-				styles: {
-					top: '45px',
-					bottom: '0px'
-				}
-			}]
+			}
+			// subpages: [{
+			// 	url: 'lndex.html',
+			// 	id: 'Index',
+			// 	createNew: true,
+			// 	extras: {
+			// 		contentData: '1'
+			// 	},
+			// 	styles: {
+			// 		top: '45px',
+			// 		bottom: '0px'
+			// 	}
+			// }]
 		})
 		// 返回按钮
 		mui.back = function (event) {
@@ -54,6 +54,10 @@ export default {
 		return {
 
 		}
+	},
+
+	components: {
+		index
 	}
 }
 
@@ -62,5 +66,9 @@ export default {
 <style lang="css" scoped>
 .content-text {
 	padding: 40px 15px;
+}
+.sub-page {
+	top: 45px;
+	bottom: 0px;
 }
 </style>
