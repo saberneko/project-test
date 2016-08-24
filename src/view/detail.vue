@@ -1,5 +1,4 @@
 <template>
-<!-- 	<span>{{$route.params.projectId}}</span> -->
 	<header class="mui-bar mui-bar-nav">
 		<a id="back" backId="main" class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color" onclick="goBack(this)"></a>
 		<h1 id="title" class="mui-title">{{detail_name ? detail_name : ''}}</h1>

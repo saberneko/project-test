@@ -43,7 +43,7 @@
 		<ul class="mui-table-view mui-grid-view mui-grid-9" style="background-color: #FFFFFF;">
 			<li v-link="{ path: '/smallclass/' + topItem.GP_Matter_bigId }" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4" v-for="($index,topItem) in lists">
 				<a>
-					<img class="img-icon" :src="'/static/img/img'+$index+'.ico'">
+					<img class="img-icon" :src="'/static/img/img' + $index + '.ico'">
 					<div class="font-color img-icon-title">{{topItem.GP_name}}</div>
 				</a>
 			</li>

@@ -1,7 +1,7 @@
 <template>
 	<header class="mui-bar mui-bar-nav" style="padding-right: 15px;position:fixed">
 		<h1 class="mui-title">豆芽儿</h1>
-		<button id='setting' onclick="NewApplication();" class=" mui-pull-right mui-btn-link">创建</button>
+		<button class=" mui-pull-right mui-btn-link mui-back-color">搜索</button>
 	</header>
 	<index></index>
 </template>

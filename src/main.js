@@ -55,6 +55,14 @@ router.map({
 		name: 'matterLists',
 		component: require('./view/matterlist')
 	},
+	'expertdetail/:expertId/:index': {
+		name: 'expertDetail',
+		component: require('./view/expertdetail')
+	},
+	'staticdetail/:index': {
+		name: 'staticdetail',
+		component: require('./view/staticdetail')
+	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
 		component: require('./view/v-if_v-for')
