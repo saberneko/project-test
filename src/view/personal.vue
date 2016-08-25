@@ -6,8 +6,8 @@
 					<a class="mui-navigate-right" id="My/MyProfile.html">
 						<img id="userimg" class="mui-media-object mui-pull-left" src="../assets/images/user-photo.png">
 						<div class="mui-media-body">
-							<label id="TLM_name"></label>
-							<p class='mui-ellipsis' id="TLM_gh"></p>
+							<label>{{userName}}</label>
+							<p class='mui-ellipsis'>{{userNo}}</p>
 						</div>
 					</a>
 				</li>
@@ -64,13 +64,35 @@
 </template>
 
 <script>
+import R from '../common/request'
+
 export default {
 
 	name: 'personal',
 
 	data () {
 		return {
+			userName: null,
+			userNo: null
+		}
+	},
 
+	ready () {
+		this.showPersonalInfo()
+	},
+
+	methods: {
+		showPersonalInfo () {
+			return R.post('/Service/userinfo.ashx?r=' + Date.now().toString()).then(data => {
+				window.localStorage.user = JSON.Stringify(data[0])
+				if (data[0].Name) {
+					this.userName = data[0].Name
+				}
+				if (data[0].GP_No) {
+					this.userNo = data[0].GP_No
+				}
+				window.localStorage.SystemUserId = data[0].SystemUserId
+			})
 		}
 	}
 }
