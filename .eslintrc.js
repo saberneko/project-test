@@ -30,7 +30,7 @@ module.exports = {
     ],
     "camelcase": [0, {"properties": "never"}],
     // close no-unused-vars when debug
-    "no-unused-vars": [process.env.NODE_ENV === 'production' ? 2 : 0],
+    "no-unused-vars": [process.env.NODE_ENV === 'production' ? 0 : 0],
     "one-var": [0],
     // forbid no multiple spaces except property of object, variable-declaration and import-declaration
     "no-multi-spaces": ["error", {

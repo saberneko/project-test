@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import mui from '../lib/mui.min.js'
+import mui from '../lib/mui.js'
 import R from 'src/common/request'
 import { GP } from '../common/index'
 

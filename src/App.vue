@@ -31,6 +31,7 @@ var exampleVM = {
 	},
 
 	ready () {
+		// this.$router.go('/login')
 		this.getHot5ProjectList() // 获取首页需要的 5 列表
 	}
 }

@@ -20,9 +20,8 @@
 </template>
 
 <script>
-import mui from '../lib/mui.min.js'
+import mui from '../lib/mui'
 import R from '../common/request'
-import { GP } from '../common/index'
 
 export default {
 	name: 'login',
@@ -75,10 +74,10 @@ export default {
 				return
 			}
 
-			let plus = {}
+			// let plus = {}
 			// var wa = plus.nativeUI && plus.nativeUI.showWaiting()
 
-			console.info(mui)
+			// console.info(mui)
 
 			R.post('/Service/Login/Login.ashx?r=' + Date.now().toString(), {
 				'GP_No':EmpNo,

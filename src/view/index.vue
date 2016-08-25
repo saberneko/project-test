@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import mui from '../lib/mui.min.js'
+import mui from '../lib/mui.js'
 import focus from './focus.vue'
 import expert from './expert.vue'
 import statics from './statics.vue'

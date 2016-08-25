@@ -1,22 +1,25 @@
 <template>
-	<header class="mui-bar mui-bar-nav">
-		<a id="back" backId="main" class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color" onclick="goBack(this)"></a>
-		<h1 id="title" class="mui-title">{{detail_name ? detail_name : ''}}</h1>
-	</header>
-	<div v-if="content" class="mui-content content-text">
-		{{{ content.GP_ContentHTML }}}
+<template v-if="content">
+	<topbar :back-route="{path: '/main'}" :title="detail_name"></topbar>
+	<div class="mui-content content-text">
+		{{{ content }}}
 	</div>
 	<button id="adding" type="button" class="mui-btn mui-btn-block mui-btn-adding" v-bind:class="[isFocused ? 'mui-btn-danger' : 'mui-btn-primary']" @click="setFocus">{{isFocused ? '取消关注' : '关注'}}</button>
 </template>
+</template>
 
 <script>
+import topbar from 'src/components/topbar'
 import R from 'src/common/request'
 import { GP } from '../common/index'
 import { getHot5ProjectList } from 'src/vuex/actions'
-
 export default {
 
 	name: 'detail',
+
+	components: {
+		topbar
+	},
 
 	data () {
 		return {
@@ -42,19 +45,29 @@ export default {
 
 	methods: {
 		getDetail () {
+			let Id = this.$route.params.projectId
+
+			if (!Id) {
+				console.warn('Id required')
+				return
+			}
+
 			return R.post('/Service/GetProjectDetail.ashx', {
-				Id: this.$route.params.projectId
+				Id
 			}).then(data => {
 				if (data[0]['GP_ContentHTML'] != null) {
 					data[0]['GP_ContentHTML'] = decodeURIComponent(data[0]['GP_ContentHTML'].replace(/src%3D%22%2Fueditor/g, ('src%3D%22' + encodeURIComponent(GP.ServiceUrl) + '%2Fueditor')))
 				}
 
-				this.content = data[0]
-				this.detail_name = data[0].GP_name
-				this.sub_name = data[0].GP_SubName
+				let project = data[0]
 
-				let { projectId } = this.$route.params,
-					project = this.projectMap.get(projectId)
+				this.content = project.GP_ContentHTML
+				this.detail_name = project.GP_name
+				this.sub_name = project.GP_SubName
+
+				// update the store
+				this.projectMap.set(Id, project)
+				this.$store.dispatch('SET_STORE', 'projectMap', this.projectMap)
 
 				this.isFocused = project.IsMy === 0
 			})
@@ -73,6 +86,7 @@ export default {
 		},
 		queryList () {
 			this.getHot5ProjectList().then(data => {
+				// never use this to update `IsMy` it due to the lack in backend
 				this.getDetail()
 			})
 		}

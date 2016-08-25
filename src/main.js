@@ -18,7 +18,7 @@ if (process.RUNTIME_ENV === 'app') {
 let router = new Router({
 	hashbang: false,// disable hashbang though in hash mode
 	history: true, // enable history mode
-	mode: 'html5'
+	mode: 'history'
 })
 
 let emptyRouteNode = Vue.extend({
@@ -34,44 +34,66 @@ router.map({
 		component: emptyRouteNode
 	},
 	'login': {
-		component: require('./view/login')
+		component: function (resolve) {
+			require(['./view/login'], resolve)
+		}
 	},
 	'main': {
-		component: require('./view/main')
+		component: function (resolve) {
+			require(['./view/main'], resolve)
+		}
 	},
 	'user/:userId/:userInfo': {
 		name: 'user',
-		component: require('./view/user')
+		component: function (resolve) {
+			require(['./view/user'], resolve)
+		}
 	},
 	'detail/:projectId': {
 		name: 'hotItemDetail',
-		component: require('./view/detail')
+		component: function (resolve) {
+			require(['./view/detail'], resolve)
+		}
 	},
 	'smallclass/:bigId': {
 		name: 'smallClasses',
-		component: require('./view/smallclass')
+		component: function (resolve) {
+			require(['./view/smallclass'], resolve)
+		}
 	},
 	'matterlist/:smallId': {
 		name: 'matterLists',
-		component: require('./view/matterlist')
+		component: function (resolve) {
+			require(['./view/matterlist'], resolve)
+		}
 	},
 	'expertdetail/:expertId/:index': {
 		name: 'expertDetail',
-		component: require('./view/expertdetail')
+		component: function (resolve) {
+			require(['./view/expertdetail'], resolve)
+		}
 	},
 	'staticdetail/:index': {
 		name: 'staticdetail',
-		component: require('./view/staticdetail')
+		component: function (resolve) {
+			require(['./view/staticdetail'], resolve)
+		}
 	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
-		component: require('./view/v-if_v-for')
+		component: function (resolve) {
+			require(['./view/v-if_v-for'], resolve)
+		}
 	},
 	'event': {
-		component: require('./view/event')
+		component: function (resolve) {
+			require(['./view/event'], resolve)
+		}
 	},
 	'class-style': {
-		component: require('./view/class-style')
+		component: function (resolve) {
+			require(['./view/class-style'], resolve)
+		}
 	}
 })
 
