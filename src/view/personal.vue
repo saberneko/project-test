@@ -2,8 +2,8 @@
 	<div id="subdiv_setting" class="mui-content">
 		<div id="tabbar-with-setting">
 			<ul class="mui-table-view mui-table-view-chevron" style="margin:10px 0px 15px 0px;">
-				<li class="mui-table-view-cell mui-media mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="My/MyProfile.html">
+				<li class="mui-table-view-cell mui-media mui-table-view-cellExt" v-link="{ path: '/personalinfolist'}">
+					<a class="mui-navigate-right">
 						<img id="userimg" class="mui-media-object mui-pull-left" src="../assets/images/user-photo.png">
 						<div class="mui-media-body">
 							<label>{{userName}}</label>
@@ -73,7 +73,8 @@ export default {
 	data () {
 		return {
 			userName: null,
-			userNo: null
+			userNo: null,
+			userId: null
 		}
 	},
 
@@ -84,14 +85,10 @@ export default {
 	methods: {
 		showPersonalInfo () {
 			return R.post('/Service/userinfo.ashx?r=' + Date.now().toString()).then(data => {
-				window.localStorage.user = JSON.Stringify(data[0])
-				if (data[0].Name) {
-					this.userName = data[0].Name
-				}
-				if (data[0].GP_No) {
-					this.userNo = data[0].GP_No
-				}
+				window.localStorage.user = JSON.stringify(data[0])
 				window.localStorage.SystemUserId = data[0].SystemUserId
+				this.userName = data[0].Name
+				this.userNo = data[0].GP_No
 			})
 		}
 	}

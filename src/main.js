@@ -79,6 +79,12 @@ router.map({
 			require(['./view/staticdetail'], resolve)
 		}
 	},
+	'personalinfolist': {
+		name: 'personalinfolist',
+		component: function (resolve) {
+			require(['./view/personalinfolist'], resolve)
+		}
+	},
 	'v-if_v-for': {
 		name: 'v-if_v-for',
 		component: function (resolve) {
