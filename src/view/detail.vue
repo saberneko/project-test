@@ -68,7 +68,7 @@ export default {
 				// update the store
 				// this.projectMap.set(Id, project)
 				// this.$store.dispatch('SET_STORE', 'projectMap', this.projectMap)
-				this.isFocused = project.IsMyFocus
+				this.isFocused = project.IsMy === 0
 			})
 		},
 		setFocus () {

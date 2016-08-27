@@ -6,15 +6,16 @@
 	<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 		<div class="mui-scroll">
 			<!--数据列表-->
-			<ul id="list" class="mui-table-view">
+			<ul class="mui-table-view">
 				<li v-for="matter in matterLists" v-link="{ path: '/detail/' + matter.GP_ProjectId }"class='mui-table-view-cell mui-media'>
 					<a>
 						<img class="mui-media-object mui-pull-left hot-list-img" src="../assets/images/top.net.ico">
-						<div class="mui-media-body hot-list-fontsize">
+						<div class="mui-media-body mui-ellipsis">
 							{{matter.GP_name}}
 							<p class="mui-ellipsis hot-list-p" >关注度:{{matter.GP_hot}}</p>
 							<p class="mui-ellipsis hot-list-p" >截止时间:{{matter.GP_Time}}</p>
 						</div>
+						<button class="mui-btn mui-icon btn-focus" v-bind:class="[matter.IsMy ? 'mui-icon-star' : 'mui-icon-star-filled']" @click.prevent="focusProject(matter.GP_ProjectId)"></button>
 					</a>
 				</li>
 			</ul>
@@ -55,6 +56,13 @@ export default {
 			}).then(data => {
 				this.matterLists = data
 			})
+		},
+		focusProject (pid) {
+			return R.post('/Service/FocusProject.ashx', {
+				Id: pid
+			}).then(() => {
+				this.getMatterList()
+			})
 		}
 	}
 }
@@ -73,5 +81,10 @@ export default {
 .hot-list-p{
 	margin-right: 30px;
 	font-size:12px;
+}
+.btn-focus{
+	font-size:20px;
+	color: #0086C8;
+	border: 0px;
 }
 </style>
