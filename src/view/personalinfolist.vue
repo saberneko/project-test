@@ -9,7 +9,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a>姓名<span id="TLM_name" class="mui-pull-right"></span></a>
+					<a>姓名<span id="TLM_name" class="mui-pull-right">{{Name}}</span></a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a>性别<span id="TLM_sex" class="mui-pull-right"></span></a>
@@ -21,12 +21,13 @@
 					<a>班级<span id="TLM_class" class="mui-pull-right"></span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a>学号<span id="TLM_no" class="mui-pull-right"></span></a>
+					<a>学号<span id="TLM_no" class="mui-pull-right">{{Id_No}}</span></a>
 				</li>
 				<li class="mui-table-view-cell">
 					<a class="mui-navigate-right">关键词<span class="mui-pull-right" style="margin-right: 17px;" id="">肉</span></a>
 				</li>
 			</ul>
+			<p><input type="file" multiple accept="image/*" v-model="file" v-on:change="upLoadImg(file)">file:{{file}}</p>
 	</div>
 </template>
 
@@ -40,7 +41,26 @@ export default {
 
 	data () {
 		return {
+			Name: null,
+			Id_No: null,
+			Img: null
+		}
+	},
 
+	ready () {
+		this.getPersonalInfo()
+	},
+
+	methods: {
+		getPersonalInfo () {
+			return R.get('/Service/userinfo.ashx?r=' + Date.now().toString()).then(data => {
+				let info = data[0]
+				this.Name = info.Name
+				this.Id_No = info.GP_No
+			})
+		},
+		upLoadImg (a) {
+			console.log(a)
 		}
 	},
 
