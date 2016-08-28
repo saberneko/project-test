@@ -41,6 +41,10 @@ module.exports = {
       },
     }],
     "key-spacing": [0],
-    "comma-spacing": [0]
+    "comma-spacing": [0],
   },
+  'env': {
+        'browser': true,
+        'node': true
+   }
 }

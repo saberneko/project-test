@@ -5,7 +5,7 @@
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
-						<img class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" src="../assets/images/user-photo.png"/>
+						<img class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -27,7 +27,8 @@
 					<a class="mui-navigate-right">关键词<span class="mui-pull-right" style="margin-right: 17px;" id="">肉</span></a>
 				</li>
 			</ul>
-			<p><input type="file" multiple accept="image/*" v-model="file" v-on:change="upLoadImg(file)">file:{{file}}</p>
+			<p><input type="file" accept="image/*" v-model="file" v-on:change="onFileChange">file:{{file}}</p>
+			<img  alt="">
 	</div>
 </template>
 
@@ -43,7 +44,8 @@ export default {
 		return {
 			Name: null,
 			Id_No: null,
-			Img: null
+			Img: '../assets/images/user-photo.png',
+			file: null
 		}
 	},
 
@@ -59,8 +61,21 @@ export default {
 				this.Id_No = info.GP_No
 			})
 		},
-		upLoadImg (a) {
-			console.log(a)
+		onFileChange (e) {
+			var files = e.target.files || e.dataTransfer.files
+			if (!files.length) {
+				return
+			}
+			this.upLoadImg(files[0])
+		},
+		upLoadImg (file) {
+			let reader = new FileReader(),
+				self = this
+			console.log(this)
+			reader.onload = e => {
+				self.Img = e.target.result
+			}
+			reader.readAsDataURL(file)
 		}
 	},
 
@@ -71,4 +86,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.mui-table-view .mui-media-object.mui-pull-right {
+    margin-right: 20px;
+}
 </style>
