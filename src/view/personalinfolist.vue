@@ -6,6 +6,7 @@
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
 						<img class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
+						<input class="hidden" type="file" accept="image/*" v-on:change="onFileChange">
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -27,14 +28,14 @@
 					<a class="mui-navigate-right">关键词<span class="mui-pull-right" style="margin-right: 17px;" id="">肉</span></a>
 				</li>
 			</ul>
-			<p><input type="file" accept="image/*" v-model="file" v-on:change="onFileChange">file:{{file}}</p>
-			<img  alt="">
 	</div>
 </template>
 
 <script>
 import topbar from 'src/components/topbar'
 import R from 'src/common/request'
+
+let defaultpic = require('../assets/images/user-photo.png')
 
 export default {
 
@@ -44,8 +45,7 @@ export default {
 		return {
 			Name: null,
 			Id_No: null,
-			Img: '../assets/images/user-photo.png',
-			file: null
+			Img: defaultpic
 		}
 	},
 
@@ -71,7 +71,6 @@ export default {
 		upLoadImg (file) {
 			let reader = new FileReader(),
 				self = this
-			console.log(this)
 			reader.onload = e => {
 				self.Img = e.target.result
 			}
@@ -85,8 +84,12 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-.mui-table-view .mui-media-object.mui-pull-right {
-    margin-right: 20px;
+<style lang="less" scoped>
+.mui-table-view .mui-media-object {
+    	margin-right: 20px;
+}
+.hidden {
+		opacity: 0;
+		height: 42px;
 }
 </style>
