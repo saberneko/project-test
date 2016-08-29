@@ -1,6 +1,12 @@
 <template>
 	<topbar :back-route="{path: '/main'}" :title="'个人信息'"></topbar>
-	<div class="mui-content" >
+	<div v-if="Imgclip" class="clip-mask">
+		<!-- <div class="clip-mask-transparent"></div> -->
+		<div style="" class="clip-imgblock"><Img id="source" :src="Imgclip"
+		v-touch:pan="onTouchStart" /></div>
+		<canvas id="canvas" width="100" height="100"></canvas>
+	</div>
+	<div v-else class="mui-content" >
 		<div class="tabbar-with-setting" style="margin-top:15px">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
@@ -35,7 +41,7 @@
 import topbar from 'src/components/topbar'
 import R from 'src/common/request'
 
-let defaultpic = require('../assets/images/user-photo.png')
+const defaultpic = require('../assets/images/user-photo.png')
 
 export default {
 
@@ -45,7 +51,8 @@ export default {
 		return {
 			Name: null,
 			Id_No: null,
-			Img: defaultpic
+			Img: defaultpic,
+			Imgclip: null
 		}
 	},
 
@@ -72,9 +79,19 @@ export default {
 			let reader = new FileReader(),
 				self = this
 			reader.onload = e => {
-				self.Img = e.target.result
+				self.Imgclip = e.target.result
 			}
 			reader.readAsDataURL(file)
+		},
+		onTouchStart (e) {
+			console.log(e)
+			console.log(e.pointers[0].pageX)
+		},
+		drawImg () {
+			let canvas = document.getElementById('canvas'),
+				ctx = canvas.getContext('2d'),
+				image = document.getElementById('source')
+			ctx.drawImage(image,22,33,100,100,0,0,100,100)
 		}
 	},
 
@@ -85,11 +102,44 @@ export default {
 </script>
 
 <style lang="less" scoped>
+html,body {
+	padding: 0;
+	margin: 0;
+}
 .mui-table-view .mui-media-object {
-    	margin-right: 20px;
+    margin-right: 20px;
 }
 .hidden {
-		opacity: 0;
-		height: 42px;
+	opacity: 0;
+	height: 42px;
+}
+.clip-mask-transparent {
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background: rgb(100,100,100);
+}
+.clip-mask {
+	position: relative;
+	width: 100%;
+	height: 250px;
+	top: 50vh;
+	margin-top: -125px;
+}
+.clip-imgblock {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		width: auto;
+		height: auto;
+		// opacity: 0.5;
+	}
 }
 </style>
