@@ -2,9 +2,17 @@
 	<topbar :back-route="{path: '/main'}" :title="'个人信息'"></topbar>
 	<div v-if="Imgclip" class="clip-mask">
 		<!-- <div class="clip-mask-transparent"></div> -->
-		<div style="" class="clip-imgblock"><Img id="source" :src="Imgclip"
-		v-touch:pan="onTouchStart" /></div>
-		<canvas id="canvas" width="100" height="100"></canvas>
+		<div style="" class="clip-imgblock">
+			<Img id="testImg" class="sourceImg" :src="Imgclip" v-crop:start="{ "x": 25, "y": 78, "x2": 306, "y2": 359, "w": 281, "h": 281 }"/>
+<!-- 			<Img class="destinationImg" :src="Imgclip" />
+			<div id="clipMain"　class="clip-main">
+				<div class="clip-handle clip-handle-nw"></div>
+				<div class="clip-handle clip-handle-ne"></div>
+				<div class="clip-handle clip-handle-se"></div>
+				<div class="clip-handle clip-handle-sw"></div>
+			</div> -->
+		</div>
+		<!-- <canvas id="canvas" width="375" height="200"></canvas> -->
 	</div>
 	<div v-else class="mui-content" >
 		<div class="tabbar-with-setting" style="margin-top:15px">
@@ -76,21 +84,28 @@ export default {
 			this.upLoadImg(files[0])
 		},
 		upLoadImg (file) {
-			let reader = new FileReader(),
-				self = this
+			let reader = new FileReader()
 			reader.onload = e => {
-				self.Imgclip = e.target.result
+				this.Imgclip = e.target.result
+				// this.drawImg()
+				if (this.Imgclip) {
+					this.mainDiv = document.getElementById('clipMain')
+				}
 			}
 			reader.readAsDataURL(file)
 		},
 		onTouchStart (e) {
 			console.log(e)
-			console.log(e.pointers[0].pageX)
+			console.log(e.deltaX)
+			console.log(e.deltaY)
 		},
 		drawImg () {
 			let canvas = document.getElementById('canvas'),
-				ctx = canvas.getContext('2d'),
-				image = document.getElementById('source')
+				image = document.getElementById('testImg')
+			if (canvas.getContext) {
+				console.log('getcontext Y')
+				var ctx = canvas.getContext('2d')
+			}
 			ctx.drawImage(image,22,33,100,100,0,0,100,100)
 		}
 	},
@@ -127,19 +142,62 @@ html,body {
 	height: 250px;
 	top: 50vh;
 	margin-top: -125px;
+	text-align: center;
 }
 .clip-imgblock {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	text-align: center;
+	// text-align: center;
 
 	img {
 		max-width: 100%;
 		max-height: 100%;
 		width: auto;
 		height: auto;
-		// opacity: 0.5;
+	}
+
+	.sourceImg {
+		opacity: 0.5;
+	}
+
+	.destinationImg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		clip:rect(0,100px,100px,0)
+	}
+
+	.clip-main {
+		position: absolute;
+		top:0;
+		left:0;
+		width: 100px;
+		height: 100px;
+		border:1px solid #008844
+	}
+
+	.clip-handle {
+		position: absolute;
+		width: 6px;
+		height: 6px;
+		background: #008844
+	}
+	.clip-handle-nw {
+		top: -3px;
+		left: -3px;
+	}
+	.clip-handle-ne {
+		top: -3px;
+		right: -3px;
+	}
+	.clip-handle-se {
+		bottom: -3px;
+		right: -3px;
+	}
+	.clip-handle-sw {
+		bottom: -3px;
+		left: -3px;
 	}
 }
 </style>

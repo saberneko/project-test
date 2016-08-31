@@ -7,6 +7,8 @@ Vue.use(Resource)
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch)
 
+require('vue-crop')
+
 import App from './App'
 
 // 运行与 App 中
@@ -83,6 +85,12 @@ router.map({
 		name: 'personalinfolist',
 		component: function (resolve) {
 			require(['./view/personalinfolist'], resolve)
+		}
+	},
+	'canvas': {
+		name: 'personalinfolist',
+		component: function (resolve) {
+			require(['./view/canvas'], resolve)
 		}
 	},
 	'v-if_v-for': {
