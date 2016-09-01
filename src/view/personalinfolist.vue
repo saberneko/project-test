@@ -3,7 +3,7 @@
 	<div v-if="Imgclip" class="clip-mask">
 		<!-- <div class="clip-mask-transparent"></div> -->
 		<div style="" class="clip-imgblock">
-			<Img id="testImg" class="sourceImg" :src="Imgclip" v-crop:start="{ "x": 25, "y": 78, "x2": 306, "y2": 359, "w": 281, "h": 281 }"/>
+			<Img id="testImg" class="sourceImg" :src="Imgclip" />
 <!-- 			<Img class="destinationImg" :src="Imgclip" />
 			<div id="clipMain"　class="clip-main">
 				<div class="clip-handle clip-handle-nw"></div>

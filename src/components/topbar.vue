@@ -2,8 +2,9 @@
 <header class="mui-bar mui-bar-nav">
 	<a class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color" @click="$router.go(backRoute)"></a>
 	<slot name="title">
-		<h1 id="title" class="mui-title">{{title ? title : ''}}</h1>
+		<h1 class="mui-title">{{title ? title : ''}}</h1>
 	</slot>
+	<slot name="button"></slot>
 </header>
 </template>
 
@@ -26,10 +27,6 @@ export default {
 				}
 			}
 		}
-	},
-
-	methods: {
-
 	}
 }
 </script>
