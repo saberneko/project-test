@@ -56,9 +56,9 @@ export default {
 			// 返回按钮
 			mui.back = function (event) {
 				if (!mui.os.ios) {
-					// if (confirm('确认退出？')) {
-					// 	plus.runtime.quit()
-					// }
+					if (confirm('确认退出？')) {
+						plus.runtime.quit()
+					}
 				}
 				return false
 			}

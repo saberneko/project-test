@@ -90,23 +90,23 @@ router.map({
 		component: function (resolve) {
 			require(['./view/canvas'], resolve)
 		}
-	},
-	'v-if_v-for': {
-		name: 'v-if_v-for',
-		component: function (resolve) {
-			require(['./view/v-if_v-for'], resolve)
-		}
-	},
-	'event': {
-		component: function (resolve) {
-			require(['./view/event'], resolve)
-		}
-	},
-	'class-style': {
-		component: function (resolve) {
-			require(['./view/class-style'], resolve)
-		}
 	}
+	//, 'v-if_v-for': {
+	// 	name: 'v-if_v-for',
+	// 	component: function (resolve) {
+	// 		require(['./view/v-if_v-for'], resolve)
+	// 	}
+	// },
+	// 'event': {
+	// 	component: function (resolve) {
+	// 		require(['./view/event'], resolve)
+	// 	}
+	// },
+	// 'class-style': {
+	// 	component: function (resolve) {
+	// 		require(['./view/class-style'], resolve)
+	// 	}
+	// }
 })
 
 router.beforeEach(function () {
