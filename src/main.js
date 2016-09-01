@@ -7,8 +7,6 @@ Vue.use(Resource)
 import VueTouch from 'vue-touch'
 Vue.use(VueTouch)
 
-require('vue-crop')
-
 import App from './App'
 
 // 运行与 App 中
