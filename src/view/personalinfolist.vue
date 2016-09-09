@@ -1,26 +1,15 @@
 <template>
 	<topbar :back-route="{path: '/main'}" :title="'个人信息'"></topbar>
-	<div v-if="Imgclip" class="clip-mask">
-		<!-- <div class="clip-mask-transparent"></div> -->
-		<div style="" class="clip-imgblock">
-			<Img id="testImg" class="sourceImg" :src="Imgclip" />
-<!-- 			<Img class="destinationImg" :src="Imgclip" />
-			<div id="clipMain"　class="clip-main">
-				<div class="clip-handle clip-handle-nw"></div>
-				<div class="clip-handle clip-handle-ne"></div>
-				<div class="clip-handle clip-handle-se"></div>
-				<div class="clip-handle clip-handle-sw"></div>
-			</div> -->
-		</div>
-		<!-- <canvas id="canvas" width="375" height="200"></canvas> -->
+	<div v-if="readFile" class="clip-mask" style="margin-top:50px;">
+			<crop-wrapper :show.sync="readFile" :initial-file="readFile" :on-clip-data="onClipImg" ></crop-wrapper>
 	</div>
 	<div v-else class="mui-content" >
 		<div class="tabbar-with-setting" style="margin-top:15px">
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
 					<a id="head" class="mui-navigate-right">头像
-						<img class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
-						<input class="hidden" type="file" accept="image/*" v-on:change="onFileChange">
+						<img v-el:avatar class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
+						<input class="fileInput" type="file" accept="image/*" @change="onFileChange">
 					</a>
 				</li>
 				<li class="mui-table-view-cell">
@@ -39,7 +28,7 @@
 					<a>学号<span id="TLM_no" class="mui-pull-right">{{Id_No}}</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">关键词<span class="mui-pull-right" style="margin-right: 17px;" id="">肉</span></a>
+					<a class="mui-navigate-right">关键�span class="mui-pull-right" style="margin-right: 17px;" id="">�/span></a>
 				</li>
 			</ul>
 	</div>
@@ -48,8 +37,11 @@
 <script>
 import topbar from 'src/components/topbar'
 import R from 'src/common/request'
+import CropWrapper from 'src/components/image-crop/wrapper'
 
 const defaultpic = require('../assets/images/user-photo.png')
+
+let reader = new FileReader()
 
 export default {
 
@@ -60,7 +52,9 @@ export default {
 			Name: null,
 			Id_No: null,
 			Img: defaultpic,
-			Imgclip: null
+			AvatarSrc: '',
+			Imgclip: null,
+			readFile: null
 		}
 	},
 
@@ -77,41 +71,37 @@ export default {
 			})
 		},
 		onFileChange (e) {
-			var files = e.target.files || e.dataTransfer.files
+			let files = e.target.files || e.dataTransfer.files
+
 			if (!files.length) {
 				return
 			}
-			this.upLoadImg(files[0])
+
+			let [ file ] = files
+			this.readFile = file
 		},
-		upLoadImg (file) {
-			let reader = new FileReader()
-			reader.onload = e => {
-				this.Imgclip = e.target.result
-				// this.drawImg()
-				if (this.Imgclip) {
-					this.mainDiv = document.getElementById('clipMain')
-				}
+		onClipImg (data) {
+			console.info(this)
+
+			if (data) {
+				this.Img = data
+				this.readFile = null
 			}
-			reader.readAsDataURL(file)
-		},
-		onTouchStart (e) {
-			console.log(e)
-			console.log(e.deltaX)
-			console.log(e.deltaY)
 		},
 		drawImg () {
-			let canvas = document.getElementById('canvas'),
-				image = document.getElementById('testImg')
-			if (canvas.getContext) {
-				console.log('getcontext Y')
-				var ctx = canvas.getContext('2d')
-			}
-			ctx.drawImage(image,22,33,100,100,0,0,100,100)
+			console.info(this.$els, this.$els.imageDrawer)
+			let canvas = this.$els.imageDrawer, // document.getElementById('canvas'),
+				image = document.getElementById('testImg'),
+				ctx = canvas && canvas.getContext('2d')
+
+			// ctx.drawImage(image,22,33,100,100,0,0,100,100)
+			// console.info(ctx)
 		}
 	},
 
 	components: {
-		topbar
+		topbar,
+		CropWrapper
 	}
 }
 </script>
@@ -121,13 +111,21 @@ html,body {
 	padding: 0;
 	margin: 0;
 }
+
 .mui-table-view .mui-media-object {
     margin-right: 20px;
 }
-.hidden {
+
+.fileInput {
 	opacity: 0;
-	height: 42px;
+    right: 35px;
+    height: 42px;
+    position: absolute;
+    width: 42px;
+    float: right;
+    cursor: pointer;
 }
+
 .clip-mask-transparent {
 	position: fixed;
 	height: 100%;
@@ -136,14 +134,16 @@ html,body {
 	top: 0;
 	background: rgb(100,100,100);
 }
+
 .clip-mask {
 	position: relative;
 	width: 100%;
-	height: 250px;
-	top: 50vh;
-	margin-top: -125px;
+	// height: 250px;
+	// top: 50vh;
+	// margin-top: -125px;
 	text-align: center;
 }
+
 .clip-imgblock {
 	position: absolute;
 	width: 100%;
@@ -165,7 +165,7 @@ html,body {
 		position: absolute;
 		top: 0;
 		left: 0;
-		clip:rect(0,100px,100px,0)
+		// clip:rect(0,100px,100px,0)
 	}
 
 	.clip-main {
