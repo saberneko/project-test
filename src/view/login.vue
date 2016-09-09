@@ -29,40 +29,40 @@ export default {
 	ready () {
 		// let self = this
 
-		mui.init({
+		// mui.init({
 
-		})
+		// })
 
-		mui.plusReady(function () {
-			let { plus } = window
+		// mui.plusReady(function () {
+			// let { plus } = window
 
-			// 仅支持竖屏显示
-			plus.screen.lockOrientation('portrait-primary')
+			// // 仅支持竖屏显示
+			// plus.screen.lockOrientation('portrait-primary')
 
-			if (window.localStorage.autoLogin === 'true') {
-				// NewOpenWindow('main.html')
-				// 延时关闭 splash
-				// setTimeout(function () {plus.navigator.closeSplashscreen()}, 600)
-			} else {
-				// 关闭 splash
-				plus.navigator.closeSplashscreen()
-			}
+			// if (window.localStorage.autoLogin === 'true') {
+			// 	// NewOpenWindow('main.html')
+			// 	// 延时关闭 splash
+			// 	// setTimeout(function () {plus.navigator.closeSplashscreen()}, 600)
+			// } else {
+			// 	// 关闭 splash
+			// 	plus.navigator.closeSplashscreen()
+			// }
 
-			// var loginButton = document.getElementById('btnLogin')
-			// loginButton.addEventListener('tap', function (event) {
-			// 	toMain()
-			// })
+			// // var loginButton = document.getElementById('btnLogin')
+			// // loginButton.addEventListener('tap', function (event) {
+			// // 	toMain()
+			// // })
 
-			// 返回按钮
-			mui.back = function (event) {
-				if (!mui.os.ios) {
-					if (confirm('确认退出？')) {
-						plus.runtime.quit()
-					}
-				}
-				return false
-			}
-		})
+			// // 返回按钮
+			// mui.back = function (event) {
+			// 	if (!mui.os.ios) {
+			// 		if (confirm('确认退出？')) {
+			// 			plus.runtime.quit()
+			// 		}
+			// 	}
+			// 	return false
+			// }
+		// })
 	},
 
 	methods: {
@@ -74,7 +74,6 @@ export default {
 				return
 			}
 
-			// let plus = {}
 			// var wa = plus.nativeUI && plus.nativeUI.showWaiting()
 
 			// console.info(mui)
@@ -85,6 +84,7 @@ export default {
 			}).then(function (dat) {
 				if ((!dat.ErrorMessage) && dat.LoginResult === 'Success') {
 					window.localStorage.empno = EmpNo
+
 					// window.localStorage.autoLogin = ((document.getElementById('autoLogin').className.indexOf('mui-active')>-1)?'true':'false')
 					// clicked('index.html')
 					self.$router.go('/main')
