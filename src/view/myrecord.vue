@@ -15,21 +15,20 @@
 	<div class="mui-content mui-scroll-wrapper">
 		<div class="mui-scroll" style="background-color: #efeff4;top: 90px;">
 			<div id="item1" class="mui-control-content mui-active">
-				<ul id="list" class="mui-table-view">
-				1
-				</ul>
+				<ulview v-if="mode === 'myfocus'" :msg="'GetBigMatterList'"></ulview>
+				<ulview v-if="mode === 'myrecord'" :msg="'GetAchievement'" class="mui-table-view">
+				</ulview>
 			</div>
-			<div id="item2" class="mui-control-content">
-				<ul class="mui-table-view">
-					2
-				</ul>
-			</div>
+<!-- 			<div id="item2" class="mui-control-content">
+
+			</div> -->
 		</div>
 	</div>
 </template>
 
 <script>
 import topbar from 'src/components/topbar'
+import ulview from 'src/components/ulview'
 import R from 'src/common/request'
 
 export default {
@@ -49,7 +48,8 @@ export default {
 	},
 
 	components: {
-		topbar
+		topbar,
+		ulview
 	}
 }
 </script>
