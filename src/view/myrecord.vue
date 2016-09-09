@@ -13,8 +13,8 @@
 		</div>
 	</div>
 	<div class="mui-content mui-scroll-wrapper">
-		<div class="mui-scroll">
-			<div id="item1" class="mui-control-content mui-active" style="top:100px">
+		<div class="mui-scroll" style="background-color: #efeff4;top: 90px;">
+			<div id="item1" class="mui-control-content mui-active">
 				<ul id="list" class="mui-table-view">
 				1
 				</ul>
@@ -61,5 +61,4 @@ export default {
 	top: 44px;
 	z-index: 999;
 }
-.
 </style>
