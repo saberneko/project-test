@@ -28,7 +28,7 @@
 					<a>学号<span id="TLM_no" class="mui-pull-right">{{Id_No}}</span></a>
 				</li>
 				<li class="mui-table-view-cell">
-					<a class="mui-navigate-right">关键词<span class="mui-pull-right" style="margin-right: 17px;" id="">肉</span></a>
+					<a class="mui-navigate-right">关键�span class="mui-pull-right" style="margin-right: 17px;" id="">�/span></a>
 				</li>
 			</ul>
 	</div>

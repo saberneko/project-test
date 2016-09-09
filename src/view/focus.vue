@@ -50,7 +50,7 @@
 		</ul>
 		<!-- <pre>{{hotLists | json}}</pre> -->
 		<ul class="mui-table-view">
-			<li v-link="{ path: '/detail/' + hotItem.GP_ProjectId }"class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
+			<li v-link="{ path: '/detail/' + hotItem.GP_ProjectId }" class="mui-table-view-cell mui-media" v-for="hotItem in hotLists">
 				<a >
 					<img class="mui-media-object mui-pull-left hot-list-img" src="../assets/images/top.net.ico">
 					<div class="mui-media-body mui-ellipsis">{{hotItem.GP_name}}

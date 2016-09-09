@@ -85,6 +85,12 @@ router.map({
 			require(['./view/personalinfolist'], resolve)
 		}
 	},
+	'myrecord': {
+		name: 'myrecord',
+		component: function (resolve) {
+			require(['./view/myrecord'],resolve)
+		}
+	},
 	'canvas': {
 		name: 'personalinfolist',
 		component: function (resolve) {

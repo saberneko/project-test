@@ -14,7 +14,7 @@
 			</ul>
 			<ul class="mui-table-view" style="margin-top: 15px;">
 				<li id="MyProjectListA" class="mui-table-view-cell mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="MyProjectList" onclick="">
+					<a class="mui-navigate-right" id="MyProjectList" v-link="{ path: '/myrecord'}">
 						点滴记录
 					</a>
 				</li>
