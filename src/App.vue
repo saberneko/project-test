@@ -12,7 +12,7 @@ import { getHot5ProjectList } from 'src/vuex/actions'
 
 function requireAll (r) { r.keys().forEach(r) }
 requireAll(require.context('./assets/images/', true, /\.png|ico$/))
-require('./assets/css/mui.min.css')
+requireAll(require.context('./assets/fonts/', true))
 
 var exampleData = {
 	name: 'Vue.js'
@@ -40,9 +40,11 @@ var exampleVM = {
 export default exampleVM
 </script>
 
-<style lang="less">
-@import (css) './assets/css/mui.min.css';
+<style lang="sass">
+@import './assets/sass/mui.scss'
+</style>
 
+<style lang="less">
 body {
 	font-family: Microsoft YaHei;
 }
