@@ -20,13 +20,8 @@
 				</li>
 				<!--add yours-->
 				<li class="mui-table-view-cell mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="My/SeekScore.html" onclick="NewOpenWindow(this.id);">
+					<a class="mui-navigate-right" id="MySeekScoreList" v-link="{path:'/inquiry'}">
 						成绩查询
-					</a>
-				</li>
-				<li class="mui-table-view-cell mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="My/MyRank.html" onclick="NewOpenWindow(this.id);">
-						我的排名
 					</a>
 				</li>
 			</ul>
@@ -38,7 +33,7 @@
 					</a>
 				</li>
 				<li class="mui-table-view-cell mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="My/MyApplicationList.html" onclick="">
+					<a class="mui-navigate-right" id="My/feedback.html" v-link="{path:'/feedback'}">
 						意见反馈
 					</a>
 				</li>
@@ -46,14 +41,19 @@
 
 			<ul class="mui-table-view" style="margin-top: 15px;">
 				<li class="mui-table-view-cell mui-table-view-cellExt">
-					<a class="mui-navigate-right" id="My/aboutus.html" onclick="NewOpenWindow(this.id);">
+					<a class="mui-navigate-right" id="My/aboutus.html" v-link="{path:'/aboutus'}">
 						关于我们
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-table-view-cellExt">
+					<a class="mui-navigate-right" id="My/modify.html" v-link="{path:'/modify'}">
+						修改密码
 					</a>
 				</li>
 			</ul>
 
 			<ul class="mui-table-view" style="margin-top: 25px;">
-				<li class="mui-table-view-cell mui-table-view-cellExt">
+				<li class="mui-table-view-cell mui-table-view-cellExt" v-link="{path:'/login'}">
 					<a id="exit" style="text-align: center;color: #FF3B30;">
 						退出
 					</a>

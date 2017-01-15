@@ -1,7 +1,7 @@
 var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
-var projectRoot = path.resolve(__dirname, '../')
+var projectRoot = path.resolve(__dirname, '../src/')
 
 module.exports = {
   entry: {
@@ -36,7 +36,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'eslint',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules|assets/
       }
     ],
     loaders: [
@@ -48,7 +48,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         include: projectRoot,
-        exclude: /node_modules/
+        exclude: /node_modules|assets/
       },
       {
         test: /\.json$/,
@@ -71,8 +71,9 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[ext]') // [hash:7]
-        }
+          name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
+        },
+        exclude: /assets/
       }
     ]
   },

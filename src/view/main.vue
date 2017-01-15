@@ -1,15 +1,14 @@
 <template>
 	<header class="mui-bar mui-bar-nav" style="padding-right: 15px;position:fixed">
-		<h1 class="mui-title">豆芽儿</h1>
-		<button class=" mui-pull-right mui-btn-link mui-back-color">搜索</button>
+		<h1 class="mui-title">豆芽儿</h1>	
 	</header>
 	<index></index>
 </template>
 
-<script>
-import mui from '../lib/mui.js'
-import index from './index.vue'
+//<button class=" mui-pull-right mui-btn-link mui-back-color">搜索</button>
 
+<script>
+import index from './index.vue'
 export default {
 
 	name: 'component_name',
@@ -34,7 +33,7 @@ export default {
 		// 	if (contentWebview == null) {
 		// 		// contentWebview = plus.webview.currentWebview().children()[0]
 		// 	}
-		// 	contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)")
+		// 	contentWebview.evalJS("window.mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)")
 		// })
 	},
 

@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import mui from '../lib/mui.js'
 import R from 'src/common/request'
 
 export default {
@@ -30,7 +29,7 @@ export default {
 	},
 
 	ready () {
-		mui('.mui-scroll-wrapper').scroll({
+		window.mui('.mui-scroll-wrapper').scroll({
 			deceleration: 0.0005
 		})
 

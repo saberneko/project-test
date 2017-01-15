@@ -17,14 +17,13 @@
 </template>
 
 <script>
-import mui from '../lib/mui.js'
 import R from '../common/request'
 import { GP } from '../common/index'
 
 let thumbup = require('../assets/images/good-filled.png')// zan
 let thumbdown = require('../assets/images/good.png')// no zan
 
-// console.info(thumbdown, thumbup)
+console.info(thumbdown, thumbup)
 // ok ， 刚才的 thumbdown 在 template 里面不能被正确解析， 因为它没有被正确赋值给组件，而模板里面只能解析组件中的 props 或 data 或 computed-> 这个没有用过吧
 
 // 请听题：

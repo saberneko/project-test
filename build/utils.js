@@ -49,7 +49,8 @@ exports.styleLoaders = function (options) {
     var loader = loaders[extension]
     output.push({
       test: new RegExp('\\.' + extension + '$'),
-      loader: loader
+      loader: loader,
+      exclude: /assets/
     })
   }
   return output

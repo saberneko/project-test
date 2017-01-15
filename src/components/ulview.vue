@@ -10,12 +10,12 @@
 				<button class="mui-btn mui-icon btn-focus" v-bind:class="[lists.IsMy ? 'mui-icon-star' : 'mui-icon-star-filled']"></button>
 			</a>
 		</li>
-		{{msg}}
 	</ul>
 </template>
 
 <script>
 import R from '../common/request'
+import { GP } from '../common/index'
 
 const user = window.localStorage.user
 
@@ -25,7 +25,7 @@ export default {
 
 	data () {
 		return {
-			lists: null
+			hotLists: null
 		}
 	},
 
@@ -37,12 +37,12 @@ export default {
 
 	ready () {
 		console.log(user)
-		// R.post('/Service/' + this.msg + '.ashx', {
-		// 	GP_No: user
-		// }).then(data => {
-		// 	this.lists = data
-		// 	console.log(this.lists)
-		// })
+		R.get('/Service/' + this.msg + '.aspx', {
+			GP_No: user
+		}).then(data => {
+			this.hotLists = data
+			console.log(this.hotLists)
+		})
 	}
 }
 </script>

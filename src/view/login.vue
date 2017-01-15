@@ -1,7 +1,5 @@
-<template>
-	<div style="text-align: center; margin:80px 0px 10px 0px">
-		<img src="../assets/images/user-photo.png" style="width: 100px;height: 100px;max-height: 100%;max-width: 100%;"/>
-	</div>
+ <template>
+	<div style="text-align: center; margin:80px 0px 10px 0px"><img src="../assets/images/user-photo.png" style="width: 100px;height: 100px;max-height: 100%;max-width: 100%;"/>	</div>
 	<form class="mui-input-group">
 		<ul class="mui-table-view mui-table-view-chevron">
 			<li class="mui-input-row">
@@ -15,12 +13,22 @@
 		</ul>
 	</form>
 	<div class="mui-content-padded">
-		<button id='btnLogin' @click="toMain()" class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">登录</button>
-	</div>
-</template>
-
+	<button id='btnLogin' @click="toMain()" class="mui-btn mui-btn-block" style="color:#FFFFFF;border:0px;background-color: #000000;">登录</button></div>
+	<br/>
+	<div align="center" class="color" >
+	<input type="checkbox" id="学生" value="学生" v-model="checkNames">
+	<label for="学生">学生</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="checkbox" id="教师" value="教师" v-model="checkNames">
+	<label for="教师">教师</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="checkbox" id="家长" value="家长" v-model="checkNames">
+	<label for="家长">家长</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+	<div align="right" class="color"><input type="checkbox" id="记住密码" value="记住密码" v-model="Pwd">
+	<label for="记住密码">记住密码 ?</label><br/><br/>
+	<input type="checkbox" id="忘记密码" value="忘记密码" v-model="code">
+	<label for="忘记密码">忘记密码 ?</label></div>
+	<p class="copy" align="center" style="margin-top:170px">浙江工商大学智慧教育工作室<br/>All Rrights Reserved</p>
+	</template>
 <script>
-import mui from '../lib/mui'
 import R from '../common/request'
 
 export default {
@@ -29,11 +37,11 @@ export default {
 	ready () {
 		// let self = this
 
-		// mui.init({
+		// window.mui.init({
 
 		// })
 
-		// mui.plusReady(function () {
+		// window.mui.plusReady(function () {
 			// let { plus } = window
 
 			// // 仅支持竖屏显示
@@ -54,8 +62,8 @@ export default {
 			// // })
 
 			// // 返回按钮
-			// mui.back = function (event) {
-			// 	if (!mui.os.ios) {
+			// window.mui.back = function (event) {
+			// 	if (!window.mui.os.ios) {
 			// 		if (confirm('确认退出？')) {
 			// 			plus.runtime.quit()
 			// 		}
@@ -70,7 +78,7 @@ export default {
 			let { EmpNo, Pwd } = this.$data, self = this
 
 			if (EmpNo === '' || Pwd === '') {
-				mui.toast('请输入学号和密码')
+				window.mui.toast('请输入学号和密码')
 				return
 			}
 
@@ -89,16 +97,16 @@ export default {
 					// clicked('index.html')
 					self.$router.go('/main')
 					// NewOpenWindow('main.html')
-					// mui.openWindow({
+					// window.mui.openWindow({
 					// 	id: 'main',
 					// 	url: 'main.html'
 					// })
 				} else {
-					mui.alert('工号或密码错误')
+					window.mui.alert('工号或密码错误')
 				}
 			})
 
-			// mui.ajax({
+			// window.mui.ajax({
 			// 	url: GP.ServiceUrl + '/Service/Login/Login.ashx?r=' + Date.now().toString(),
 			// 	type: 'POST',
 			// 	data: {'GP_No':EmpNo,'GP_Password':Pwd},
@@ -109,16 +117,16 @@ export default {
 				// 		// window.localStorage.autoLogin = ((document.getElementById('autoLogin').className.indexOf('mui-active')>-1)?'true':'false')
 				// 		// clicked('index.html')
 				// 		// NewOpenWindow('main.html')
-				// 		mui.openWindow({
+				// 		window.mui.openWindow({
 				// 			id: 'main',
 				// 			url: 'main.html'
 				// 		})
 				// 	} else {
-				// 		mui.alert('工号或密码错误')
+				// 		window.mui.alert('工号或密码错误')
 				// 	}
 				// },
 				// error:function (e) {
-				// 	// mui.alert('发生错误，登录失败！'+e.responseText)
+				// 	// window.mui.alert('发生错误，登录失败！'+e.responseText)
 				// },
 				// complete:function () {
 				// 	// wa.close()
@@ -129,8 +137,10 @@ export default {
 
 	data () {
 		return {
-			EmpNo: '1311040103',
-			Pwd: '123456'
+			EmpNo: '1211400118',
+			Pwd: '123456',
+			checkNames:[],
+			code:' '
 		}
 	}
 
@@ -225,4 +235,14 @@ body,div{background:#fff;}
 
 }
 .mui-content{background:#fff;}
+.copy{margin:200px 1200px 1500px 10px;
+      background-color:#EFEFEF;
+      width:100%;
+      font-size:20px; }
+.color{ background-color:#EFEFEF;}
+.fonts{font-size:40px;
+       margin:40px 1200px 20px 10px;}
 </style>
+
+
+

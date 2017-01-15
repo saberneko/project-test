@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import mui from '../lib/mui.js'
 import home from './home'
 import personal from './personal'
 

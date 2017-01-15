@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import mui from '../lib/mui.js'
 import R from 'src/common/request'
 
 export default {
@@ -32,7 +31,7 @@ export default {
 	name: 'matterlist',
 
 	ready () {
-		mui('.mui-scroll-wrapper').scroll({
+		window.mui('.mui-scroll-wrapper').scroll({
 			deceleration: 0.0005 // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 		})
 
@@ -58,7 +57,7 @@ export default {
 			})
 		},
 		focusProject (pid) {
-			return R.post('/Service/FocusProject.ashx', {
+			return R.post('/Service/Test.ashx', {
 				Id: pid
 			}).then(() => {
 				this.getMatterList()

@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import mui from '../lib/mui.js'
 import focus from './focus.vue'
 import expert from './expert.vue'
 import statics from './statics.vue'
@@ -32,11 +31,11 @@ export default {
 	name: 'home',
 
 	ready () {
-		mui('.mui-scroll-wrapper').scroll({
+		window.mui('.mui-scroll-wrapper').scroll({
 			deceleration: 0.0005
 		})
 
-		var slider = mui('#slider')
+		var slider = window.mui('#slider')
 		slider.slider({
 			interval: 5000
 		})

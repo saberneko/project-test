@@ -12,7 +12,6 @@ import { getHot5ProjectList } from 'src/vuex/actions'
 
 function requireAll (r) { r.keys().forEach(r) }
 requireAll(require.context('./assets/images/', true, /\.png|ico$/))
-requireAll(require.context('./assets/fonts/', true))
 
 var exampleData = {
 	name: 'Vue.js'
@@ -32,20 +31,19 @@ var exampleVM = {
 	},
 
 	ready () {
-		this.$router.go('/login')
-		this.getHot5ProjectList() // 获取首页需要的 5 列表
+		// this.$router.go('/login')
+		// this.getHot5ProjectList() // 获取首页需要的 5 列表
 	}
 }
 
 export default exampleVM
 </script>
 
-<style lang="sass">
-@import './assets/sass/mui.scss'
-</style>
-
 <style lang="less">
+// @import './assets/css/mui.min.css';
+
 body {
 	font-family: Microsoft YaHei;
 }
+
 </style>
