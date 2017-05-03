@@ -40,6 +40,10 @@ let router = new VueRouter({
   mode: 'hash',
   routes: [
     {
+      path: '/',
+      redirect: '/login'
+    },
+    {
       path: '/login',
       component: resolve => require(['./view/login'], resolve)
     },
