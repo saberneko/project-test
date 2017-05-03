@@ -9,8 +9,8 @@
         <ul class="mui-table-view">
           <li class="mui-table-view-cell">
             <a id="head" class="mui-navigate-right">头像
-              <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop']" :crop="false" url=""
-              extensions="png,jpeg,gif,jpg" v-on:imageuploaded="imageuploaded"></vue-core-image-upload>
+              <!-- <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop']" :crop="false" url=""
+              extensions="png,jpeg,gif,jpg" v-on:imageuploaded="imageuploaded"></vue-core-image-upload> -->
               <!-- <img ref="avatar" class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
               <input class="fileInput" type="file" accept="image/*" @change="onFileChange"> -->
             </a>
@@ -42,7 +42,7 @@
 <script>
 import topbar from 'src/components/topbar'
 import R from 'src/common/request'
-import VueCoreImgUpload from 'vue-core-image-upload'
+// import VueCoreImgUpload from 'vue-core-image-upload'
 
 const defaultpic = require('../assets/images/user-photo.png')
 
@@ -114,9 +114,9 @@ export default {
   },
 
   components: {
-    topbar,
+    topbar
     // CropWrapper,
-    'vue-core-image-upload': VueCoreImgUpload
+    // 'vue-core-image-upload': VueCoreImgUpload
   }
 }
 </script>
