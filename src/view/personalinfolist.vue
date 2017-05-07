@@ -1,18 +1,13 @@
 <template>
   <div>
     <topbar :back-route="{path: '/main'}" :title="'个人信息'"></topbar>
-    <div v-if="readFile" class="clip-mask" style="margin-top:50px;">
-        <crop-wrapper :show.sync="readFile" :initial-file="readFile" :on-clip-data="onClipImg" ></crop-wrapper>
-    </div>
-    <div v-else class="mui-content" >
+    <div class="mui-content" >
       <div class="tabbar-with-setting" style="margin-top:15px">
         <ul class="mui-table-view">
           <li class="mui-table-view-cell">
-            <a id="head" class="mui-navigate-right">头像
-              <!-- <vue-core-image-upload :class="['pure-button','pure-button-primary','js-btn-crop']" :crop="false" url=""
-              extensions="png,jpeg,gif,jpg" v-on:imageuploaded="imageuploaded"></vue-core-image-upload> -->
-              <!-- <img ref="avatar" class="mui-action-preview mui-media-object mui-pull-right" id="head-img1" :src="Img"/>
-              <input class="fileInput" type="file" accept="image/*" @change="onFileChange"> -->
+            <a id="head" class="mui-navigate-right" @click="triggerClipImg($event)">头像
+              <img class="mui-action-preview mui-media-object mui-pull-right" :src="clipUrl"></img>
+              <input class="file" type="file" accept="imags/*" @change="clipImg($event)" ref="input">
             </a>
           </li>
           <li class="mui-table-view-cell">
@@ -36,12 +31,23 @@
         </ul>
       </div>
     </div>
+    <div class="clip-wp" id="clip-wp" v-show="isClip">
+      <div id="container">
+        <canvas id="image-box"></canvas>
+        <canvas id="cover-box"></canvas>
+      </div>
+      <div class="clip-ft">
+        <button class="btn btn-cancel" id="cancel-img" @click.stop="cancelImg">取消</button>
+        <button class="btn btn-save" id="save-img" @click.stop="saveImg">保存</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import topbar from 'src/components/topbar'
 import R from 'src/common/request'
+import Clip from 'src/common/clip'
 // import VueCoreImgUpload from 'vue-core-image-upload'
 
 const defaultpic = require('../assets/images/user-photo.png')
@@ -56,11 +62,8 @@ export default {
     return {
       Name: null,
       Id_No: null,
-      Img: defaultpic,
-      AvatarSrc: '',
-      Imgclip: null,
-      readFile: null,
-      src: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png'
+      isClip: false,
+      clipUrl: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png'
     }
   },
 
@@ -76,47 +79,25 @@ export default {
         this.Id_No = info.GP_No
       })
     },
-    onFileChange (e) {
-      let files = e.target.files || e.dataTransfer.files
-
-      if (!files.length) {
-        return
-      }
-
-      let [ file ] = files
-      this.readFile = file
+    triggerClipImg () {
+      this.$refs.input.click()
     },
-    onClipImg (data) {
-      console.info(this)
-
-      if (data) {
-        this.Img = data
-        this.readFile = null
-      }
+    clipImg (e) {
+      this.clip = new Clip('container', 'image-box', 'cover-box', this)
+      this.clip.init(e.target.files[0])
+      this.isClip = true
     },
-    drawImg () {
-      console.info(this.$els, this.$els.imageDrawer)
-      let canvas = this.$els.imageDrawer, // document.getElementById('canvas'),
-        image = document.getElementById('testImg'),
-        ctx = canvas && canvas.getContext('2d')
-
-      // ctx.drawImage(image,22,33,100,100,0,0,100,100)
-      // console.info(ctx)
-    }
-  },
-
-  events: {
-    imageuploaded (res) {
-      if (res.errcode === 0) {
-        this.src = 'http://img1.vued.vanthink.cn/vued751d13a9cb5376b89cb6719e86f591f3.png'
-      }
+    saveImg () {
+      this.isClip = false
+      this.clip.saveImg()
+    },
+    cancelImg () {
+      this.clip.cancelImg()
     }
   },
 
   components: {
     topbar
-    // CropWrapper,
-    // 'vue-core-image-upload': VueCoreImgUpload
   }
 }
 </script>
@@ -127,7 +108,94 @@ html,body {
   margin: 0;
 }
 
+div{
+  border: 0;
+}
+
+input {
+  display: none
+}
+
+button {
+  outline: none;
+  border: 0;
+  background-color: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+
 .mui-table-view .mui-media-object {
     margin-right: 20px;
+}
+.clip-wp {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: #000;
+  text-align: center;
+  #container {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 20px;
+    bottom: 80px;
+    background-color: #000;
+  }
+  .clip-ft {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    bottom: 0;
+    height: 80px;
+    background-color: #000;
+    color: #ffffff;
+    font-size: 0.9em;
+    .btn {
+      width: 30%;
+      height: 35px;
+      margin: 0 20px;
+      text-align: center;
+      &:active {
+        color: #777777;
+      }
+    }
+    .btn-save {
+      background-color: #4285f4;
+      &:active {
+        background-color: #376ec7;
+      }
+    }
+    .btn-cancel {
+      background-color: #c74d3e;
+      &:active {
+        background-color: #bb3f30;
+      }
+    }
+  }
+}
+#image-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+#cover-box{
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  margin: auto;
 }
 </style>
