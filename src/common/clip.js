@@ -1,3 +1,5 @@
+import R from 'src/common/request'
+
 class Clip {
   //需要用到vue实例中的属性， 所以传入一个$vm当闭包使用
   constructor(wpId, imgId, coverId, $vm) {
@@ -119,9 +121,8 @@ class Clip {
         startY = 0;
 
     t.coverBox.addEventListener('touchstart', function(event) {
-      //保证touchmove正常触发
+      //阻止默认的页面滚动或者缩放行为，保证touchmove正常触发
       event.preventDefault();
-      console.log(event)
 
       let e = event.touches[0];
 
@@ -136,7 +137,6 @@ class Clip {
     })
 
     t.coverBox.addEventListener('touchmove', function(event) {
-      console.log(event)
       let e = event.touches[0];
 
       let offsetX = e.pageX - pageX,
@@ -147,27 +147,35 @@ class Clip {
         t.sx = startX + offsetX;
         t.sy = startY + offsetY;
 
-        //限制裁剪框的范围
-        if(t.sx <= 0 && t.sy <= 0) {
-          t.sx = 0;
-          t.sy = 0;
-        } else if (t.sx >= t.imgWidth - t.sWidth && t.sy >= t.imgHeight - t.sHeight) {
-          t.sx = t.imgWidth - t.sWidth;
-          t.sy = t.imgHeight - t.sHeight;
+        // 限制裁剪框的范围
+        if (t.sx <= 0 && t.sy <= 0) {
+          // 移动到遮罩左上角
+          t.sx = 0
+          t.sy = 0
         } else if (t.sx >= t.imgWidth - t.sWidth && t.sy <= 0) {
-          t.sx = t.imgWidth - t.sWidth;
-          t.sy = 0;
+          // 移动到遮罩右上角
+          t.sx = t.imgWidth - t.sWidth
+          t.sy = 0
         } else if (t.sx <= 0 && t.sy >= t.imgHeight - t.sHeight) {
-          t.sx = 0;
-          t.sy = t.imgHeight - t.sHeight;
-        } else if(t.sx <= 0 ) {
-          t.sx = 0;
-        } else if(t.sx >= t.imgWidth - t.sWidth) {
-          t.sx = t.imgWidth - t.sWidth;
-        } else if(t.sy <= 0) {
-          t.sy = 0;
-        } else if(t.sy >= t.imgHeight - t.sHeight) {
-          t.sy = t.imgHeight - t.sHeight;
+          // 移动到遮罩左下角
+          t.sx = 0
+          t.sy = t.imgHeight - t.sHeight
+        } else if (t.sx >= t.imgWidth - t.sWidth && t.sy >= t.imgHeight - t.sHeight) {
+          // 移动到遮罩右下角
+          t.sx = t.imgWidth - t.sWidth
+          t.sy = t.imgHeight - t.sHeight
+        } else if (t.sx <= 0) {
+          // 移动到遮罩左边框
+          t.sx = 0
+        } else if (t.sy <= 0) {
+          // 移动到遮罩上边框
+          t.sy = 0
+        } else if (t.sx >= t.imgWidth - t.sWidth) {
+          // 移动到遮罩右边框
+          t.sx = t.imgWidth - t.sWidth
+        } else if (t.sy >= t.imgHeight - t.sHeight) {
+          // 移动到遮罩下边框
+          t.sy = t.imgHeight - t.sHeight
         }
         //重新绘制遮罩
         t.paintCover();
@@ -175,12 +183,11 @@ class Clip {
     })
 
     t.coverBox.addEventListener('touchend', function(event) {
-      console.log(event)
       draging = false;
     })
   }
 
-  saveImg() {
+  saveImg(URL) {
 
     let t =this,
         saveCanvas = document.createElement('canvas'),
@@ -188,19 +195,21 @@ class Clip {
 
     saveCanvas.width = 300;
     saveCanvas.height = 300;
-
+    // 新建图片用于存放源图片
     let img = new Image();
     img.src = t.imgUrl;
 
     img.onload = function() {
-      //计算剪裁尺寸用于剪裁图片
+       // 计算缩放尺寸（源图片与图片画布的比例）用于剪裁时还原图片像素
       let cropWidthScale = img.width / t.imgWidth,
           cropHeighScale = img.height / t.imgHeight;
 
       ctx.drawImage(img, cropWidthScale * t.sx, cropWidthScale * t.sy,
         cropWidthScale * t.sWidth, cropWidthScale * t.sHeight, 0, 0, 300, 300);
 
-      t.$vm.clipUrl = saveCanvas.toDataURL("image/jpeg");
+      t.$vm.clipUrl = saveCanvas.toDataURL();
+
+      t.upLoadImg(t.$vm.clipUrl, URL);
     }
   }
 
@@ -208,6 +217,28 @@ class Clip {
     let t = this;
     t.$vm.isClip = false;
   }
+
+  upLoadImg(clipUrl, URL) {
+
+    let fd = new FormData();
+
+    // this.covertBase64UrlToBlob(clipUrl)
+
+
+    return R.post(URL, {
+      'Image' : clipUrl
+    }).then( data => {
+      console.log(data)
+    })
+  }
+
+  covertBase64UrlToBlob(urlData) {
+    let bytes = window.atob(urlData.split(',')[1]);
+      // console.log(bytes);
+    let ab = new ArrayBuffer(bytes.length);
+
+  }
+
 }
 
 export default Clip;

@@ -13,14 +13,11 @@
           <li class="mui-table-view-cell">
             <a>姓名<span id="TLM_name" class="mui-pull-right">{{Name}}</span></a>
           </li>
-          <li class="mui-table-view-cell">
-            <a>性别<span id="TLM_sex" class="mui-pull-right"></span></a>
-          </li>
         </ul>
 
         <ul class="mui-table-view" style="margin-top: 15px;">
           <li class="mui-table-view-cell">
-            <a>班级<span id="TLM_class" class="mui-pull-right"></span></a>
+            <a>班级<span id="TLM_class" class="mui-pull-right">{{Class}}</span></a>
           </li>
           <li class="mui-table-view-cell">
             <a>学号<span id="TLM_no" class="mui-pull-right">{{Id_No}}</span></a>
@@ -62,8 +59,9 @@ export default {
     return {
       Name: null,
       Id_No: null,
+      Class: null,
       isClip: false,
-      clipUrl: 'http://img1.vued.vanthink.cn/vued0a233185b6027244f9d43e653227439a.png'
+      clipUrl: null
     }
   },
 
@@ -73,10 +71,14 @@ export default {
 
   methods: {
     getPersonalInfo () {
-      return R.get('/Service/userinfo.ashx?r=' + Date.now().toString()).then(data => {
+      return R.get('/Service/GetUserInfo.ashx').then(data => {
         let info = data[0]
         this.Name = info.Name
         this.Id_No = info.GP_No
+        this.Class = info.GP_Major
+        this.clipUrl = info.GP_Image
+      }).catch(err => {
+        console.log(err)
       })
     },
     triggerClipImg () {
@@ -89,7 +91,7 @@ export default {
     },
     saveImg () {
       this.isClip = false
-      this.clip.saveImg()
+      this.clip.saveImg('/Service/GetImage.ashx')
     },
     cancelImg () {
       this.clip.cancelImg()
