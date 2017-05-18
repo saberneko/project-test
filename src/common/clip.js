@@ -220,8 +220,8 @@ class Clip {
 
   upLoadImg(clipUrl, URL) {
 
-    let fd = new FormData();
-
+    let fd = new FormData()
+    console.log('uploading')
     // this.covertBase64UrlToBlob(clipUrl)
 
 

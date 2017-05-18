@@ -1,10 +1,6 @@
 <template>
   <div class="migration">
-    <header class="mui-bar mui-bar-nav" v-link="{path:'/main'}">
-      <a class="mui-icon mui-icon-left-nav mui-pull-left"></a>
-      <a class="mui-icon mui-icon-reply mui-pull-right"></a>
-      <h1 class="mui-title">成绩查询</h1>
-    </header>
+    <topbar :back-route="{path: '/main'}" :title="'成绩查询'"></topbar>
     <form class="mui-input-group" style="margin-top:70px" >
       <ul class="mui-table-view mui-table-view-chevron">
         <li class="mui-table-view-cell">
@@ -30,6 +26,7 @@
 <script>
 import R from 'src/common/request'
 import { GP } from '../common/index'
+import topbar from '../components/topbar'
 
 export default {
   name : 'inquiry',
@@ -44,7 +41,11 @@ export default {
     }
   },
 
-  ready () {
+  components: {
+    topbar
+  },
+
+  created () {
     this.getPersonalInfo()
     this.getfinalgrade()
   },

@@ -5,11 +5,20 @@
         <span class="mui-icon mui-icon-home"></span>
         <span onclick="getHot5ProjectList()" class="mui-tab-label">豆芽</span>
       </a>
+<!--       <router-link class="mui-tab-item mui-active" tag="a" to="/index">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">豆芽</span>
+      </router-link> -->
+<!--       <router-link class="mui-tab-item" tag="a" to="/index/personal">
+        <span class="mui-icon mui-icon-gear"></span>
+        <span class="mui-tab-label">个人</span>
+      </router-link> -->
       <a id="tab_setting" class="mui-tab-item" href="subdiv_setting" @click="setDisplay('personal')">
         <span class="mui-icon mui-icon-gear"></span>
         <span class="mui-tab-label">个人</span>
       </a>
     </nav>
+<!--     <router-view></router-view> -->
     <component :is="currentView"></component>
   </div>
 </template>

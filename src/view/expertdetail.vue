@@ -1,18 +1,22 @@
 <template>
-<div class="migration">
-  <header class="mui-bar mui-bar-nav">
-    <a class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color"></a>
-    <h1 class="mui-title">{{name}}</h1>
-  </header>
-  <div class="mui-content mui-scroll-wrapper content-text">
-    <div class="mui-scroll">{{content}}</div>
+  <div>
+    <!-- <header class="mui-bar mui-bar-nav">
+      <a class="main mui-icon mui-icon-left-nav mui-pull-left mui-back-color"></a>
+      <h1 class="mui-title">{{name}}</h1>
+    </header> -->
+    <topbar :back-route="{path: '/home'}" :title="name"></topbar>
+    <div class="mui-content content-text" v-html="content">
+    </div>
+<!--     <div class="mui-content mui-scroll-wrapper content-text">
+      <div class="mui-scroll">{{content}}</div>
+    </div> -->
   </div>
-</div>
 </template>
 
 <script>
 import R from 'src/common/request'
 import { GP } from '../common/index'
+import topbar from 'src/components/topbar'
 
 export default {
 
@@ -25,24 +29,28 @@ export default {
     }
   },
 
-  ready () {
-    window.mui('.mui-scroll-wrapper').scroll({
-      deceleration: 0.0005 // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-    })
-
+  created () {
+    // window.mui('.mui-scroll-wrapper').scroll({
+    //   deceleration: 0.0005 // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+    // })
     this.getExpertDetail()
   },
 
   methods: {
     getExpertDetail () {
       return R.post('/Service/GetManito.ashx').then(data => {
-        let contentText = data[this.$route.params.index].GP_ContentHTML
-        this.name = data[this.$route.params.index].GP_name
+        let index = this.$route.params.index
+        let contentText = data[index].GP_ContentHTML
+        this.name = data[index].GP_name
         if (contentText) {
           this.content = decodeURIComponent(contentText.replace(/src%3D%22%2Fueditor/g, ('src%3D%22' + encodeURIComponent(GP.ServiceUrl) + '%2Fueditor')))
         }
       })
     }
+  },
+
+  components: {
+    topbar
   }
 }
 </script>

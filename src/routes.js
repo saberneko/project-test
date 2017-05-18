@@ -21,6 +21,14 @@ export let router = new VueRouter({
       path: '/login',
       component: resolve => require(['./view/login'], resolve)
     },
+    // {
+    //   path: '/index',
+    //   component: resolve => require(['./view/index'], resolve),
+    //   children: [
+    //     {path: '', component: resolve => require(['./view/login'], resolve)},
+    //     {path: 'personal', component: personal}
+    //   ]
+    // },
     {
       path: '/home',
       component: resolve => require(['./view/main'], resolve)
@@ -53,6 +61,10 @@ export let router = new VueRouter({
     {
       path: '/personalinfolist',
       component: resolve => require(['./view/personalinfolist'], resolve)
+    },
+    {
+      path: '/expertdetail/:index',
+      component: resolve => require(['./view/expertdetail'], resolve)
     },
     {
       path: '*',

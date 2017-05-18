@@ -1,10 +1,6 @@
 <template>
-  <div class="migration">
-<!--     <header class="mui-bar mui-bar-nav" v-link="{path:'/main'}">
-    <a class="mui-icon mui-icon-left-nav mui-pull-left"></a>
-    <a class="mui-icon mui-icon-reply mui-pull-right"></a>
-    <h1 class="mui-title">成果记录申请</h1>
-    </header> -->
+  <div>
+    <topbar :back-route="{path: '/main'}" :title="'成果申请'"></topbar>
     <form class="mui-input-group" style="margin-top:70px" >
       <div class="mui-table-view-cell">
         <a>学号<span id="TLM_no" class="mui-pull-right">{{Id_No}}</span></a>
@@ -46,15 +42,13 @@ import R from '../common/request'
 import { GP } from '../common/index'
 import datepicker from '../components/vue-datepicker-1'
 import bigpicker from 'src/components/bigpicker'
+import topbar from '../components/topbar'
 
 export default {
 
   name: 'research',
 
   created () {
-    window.mui('.mui-scroll-wrapper').scroll({
-      deceleration: 0.0005 // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
-    })
     this.getPersonalInfo()
   },
 
@@ -70,7 +64,8 @@ export default {
   },
   components:{
     datepicker: datepicker,
-    bigpicker:bigpicker
+    bigpicker:bigpicker,
+    topbar: topbar
   },
 
   methods: {

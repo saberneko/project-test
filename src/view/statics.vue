@@ -1,9 +1,9 @@
 <template>
 	<div id="item3" class="mui-control-content mui-active">
 		<div class="mui-panel-view">
-			<div class="mui-panel-cell-item" v-for="($index,static) in staticsList" v-link="{ path: '/staticdetail/' + $index }">
+			<div class="mui-panel-cell-item" v-for="(static, $index) in staticsList" v-link="{ path: '/staticdetail/' + $index }">
 				<a >
-					<img :src="'static/img/img-eg' + $index + '.jpg'" alt="home-img">
+					<img :src="'../../static/images/img-eg' + $index + '.jpg'" alt="home-img">
 					<p class="mui-panel-cell-title">{{static.GP_name}}</p>
 				</a>
 			</div>
@@ -25,7 +25,7 @@ export default {
 		}
 	},
 
-	ready () {
+	created () {
 		window.mui('.mui-scroll-wrapper').scroll({
 			deceleration: 0.0005 // flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
 		})

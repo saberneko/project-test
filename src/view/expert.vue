@@ -1,7 +1,7 @@
 <template>
 <div id="item2" class="mui-control-content mui-active">
   <ul class="mui-table-view">
-    <router-link tag="li" class="'mui-table-view-cell mui-media'" v-for="(expert, index) in expertsInfo" :to="{ path: '/expertdetail/' + expert.GP_ManitoId + '/' + index}" :key="expert.GP_ManitoId">
+    <router-link tag="li" class="'mui-table-view-cell mui-media'" v-for="(expert, index) in expertsInfo" :to="{ path: '/expertdetail/' + index}" :key="expert.GP_ManitoId">
       <img class="mui-media-object mui-pull-left hot-list-img" :src="'static/images/user-photo.png'">
       <div class="mui-media-body mui-ellipsis person-fontsize">{{expert.GP_name}}
         <p style="width: 50%;margin-top:5px;white-space: nowrap;text-overflow:ellipsis;"><span class="mui-ellipsis mui-label">{{expert.GP_SubName}}</span></p>

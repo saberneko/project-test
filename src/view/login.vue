@@ -20,7 +20,7 @@
     </div>
     <div class="checkbox">
       <div class="checkbox-item">
-        <input type="checkbox" value="记住密码" v-model="Pwd">
+        <input type="checkbox" value="记住密码" v-model="checkNames">
         <label for="记住密码">记住密码 </label>
       </div>
       <div class="checkbox-item">
